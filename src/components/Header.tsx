@@ -18,7 +18,7 @@ export function Header() {
         {/* Color Picker Button */}
         <button
           onClick={() => setShowColorPicker(true)}
-          className="absolute top-4 right-4 z-30 p-2 bg-black bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all"
+          className="hidden absolute top-4 right-4 z-30 p-2 bg-black bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all"
           title="Edit Colors"
         >
           <Palette className="w-5 h-5 text-slate-600" />
