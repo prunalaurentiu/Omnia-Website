@@ -1,5 +1,4 @@
-import { Progress } from "./ui/progress";
-import { TrendingUp, Users, DollarSign, Briefcase, Palette, Target, Award } from "lucide-react";
+import { Users, DollarSign, Palette, Target } from "lucide-react";
 import { useState } from "react";
 import { LightColorPicker } from "./LightColorPicker";
 import { useSectionColors } from "./SectionColorProvider";
@@ -11,8 +10,6 @@ export function ResultsSection() {
   const { colors, setColors } = useSectionColors('results', false);
   const { textContent } = useTextContent();
   
-  const performanceMetrics = textContent.results.performanceMetrics;
-
   const keyAchievements = [
     {
       icon: DollarSign,
@@ -21,13 +18,13 @@ export function ResultsSection() {
       description: textContent.results.metrics[1].description
     },
     {
-      icon: Briefcase,
+      icon: Users,
       title: textContent.results.metrics[2].value,
       subtitle: textContent.results.metrics[2].label,
       description: textContent.results.metrics[2].description
     },
     {
-      icon: TrendingUp,
+      icon: Target,
       title: textContent.results.metrics[3].value,
       subtitle: textContent.results.metrics[3].label,
       description: textContent.results.metrics[3].description
@@ -83,78 +80,33 @@ export function ResultsSection() {
           />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Performance Metrics with Progress Bars */}
-          <div className="space-y-8">
-            <h3 className="text-card-title text-slate-900 mb-8">Performance Metrics</h3>
-            {performanceMetrics.map((metric, index) => (
-              <div key={index} className="group hover:scale-105 transition-all duration-200 cursor-pointer">
-                <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg border transition-shadow duration-200" style={{borderColor: colors.borderColor}}>
-                  <div className="flex justify-between items-center mb-3">
-                    <EditableText
-                      path={`results.performanceMetrics.${index}.label`}
-                      value={metric.label}
-                      className="text-body text-slate-700 font-medium"
-                    />
-                    <span className="text-body font-semibold" style={{color: colors.primaryAccent}}>
-                      <EditableText
-                        path={`results.performanceMetrics.${index}.value`}
-                        value={metric.value.toString()}
-                      />%
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3 mb-3">
-                    <div 
-                      className="h-3 rounded-full transition-all duration-700 ease-out"
-                      style={{
-                        width: `${metric.value}%`,
-                        backgroundColor: colors.primaryAccent
-                      }}
-                    ></div>
-                  </div>
-                  <EditableText
-                    path={`results.performanceMetrics.${index}.description`}
-                    value={metric.description}
-                    className="text-caption text-slate-500"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Key Achievements */}
-          <div className="space-y-6">
-            <h3 className="text-card-title text-slate-900 mb-8">Key Achievements</h3>
+        <div className="max-w-5xl mx-auto">
+          <h3 className="text-card-title text-slate-900 mb-10 text-center">Key Achievements</h3>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {keyAchievements.map((achievement, index) => {
               const Icon = achievement.icon;
               return (
-                <div key={index} className="group hover:scale-105 hover:shadow-lg transition-all duration-200 cursor-pointer">
-                  <div className="bg-white rounded-lg p-6 border shadow-md transition-shadow duration-200" style={{borderColor: colors.borderColor}}>
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200" style={{backgroundColor: colors.primaryAccent}}>
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <EditableText
-                          path={`results.metrics.${index + 1}.value`}
-                          value={achievement.title}
-                          className="text-metric text-slate-900 mb-1 block"
-                        />
-                        <EditableText
-                          path={`results.metrics.${index + 1}.label`}
-                          value={achievement.subtitle}
-                          className="text-body mb-2 block"
-                          style={{color: colors.primaryAccent}}
-                        />
-                        <EditableText
-                          path={`results.metrics.${index + 1}.description`}
-                          value={achievement.description}
-                          className="text-caption text-slate-600"
-                          multiline
-                        />
-                      </div>
-                    </div>
+                <div key={index} className="bg-white rounded-lg p-8 border shadow-md transition-shadow duration-200 hover:shadow-lg text-center" style={{borderColor: colors.borderColor}}>
+                  <div className="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-6" style={{backgroundColor: colors.primaryAccent}}>
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
+                  <EditableText
+                    path={`results.metrics.${index + 1}.value`}
+                    value={achievement.title}
+                    className="text-metric text-slate-900 mb-2 block"
+                  />
+                  <EditableText
+                    path={`results.metrics.${index + 1}.label`}
+                    value={achievement.subtitle}
+                    className="text-body font-semibold mb-3 block"
+                    style={{color: colors.primaryAccent}}
+                  />
+                  <EditableText
+                    path={`results.metrics.${index + 1}.description`}
+                    value={achievement.description}
+                    className="text-caption text-slate-600"
+                    multiline
+                  />
                 </div>
               );
             })}

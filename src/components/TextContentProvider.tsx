@@ -108,11 +108,6 @@ export interface TextContent {
       value: string;
       description: string;
     }[];
-    performanceMetrics: {
-      label: string;
-      value: number;
-      description: string;
-    }[];
     investorPerformance: {
       metric: string;
       value: string;
@@ -345,31 +340,9 @@ const defaultTextContent: TextContent = {
         description: "Portfolio companies have created over 250 new jobs, 95% of which are held by Romanian citizens."
       },
       {
-        label: "ESG integration",
-        value: "Article 6 with upgrades",
-        description: "Screening investments and implementing energy efficiency, inclusive employment and governance best practices."
-      }
-    ],
-    performanceMetrics: [
-      {
-        label: "Revenue growth",
-        value: 90,
-        description: "Average top-line expansion achieved through commercial acceleration initiatives."
-      },
-      {
-        label: "Margin improvement",
-        value: 88,
-        description: "Disciplined operational upgrades translate into sustained profitability gains."
-      },
-      {
-        label: "Return on capital",
-        value: 85,
-        description: "Focused capital allocation and refinancing strategies enhance capital efficiency."
-      },
-      {
-        label: "ESG progress",
-        value: 82,
-        description: "Portfolio-wide improvements in governance, energy efficiency and inclusive employment."
+        label: "Investment analytics",
+        value: "Scanned more than 500 companies",
+        description: "Taking the time to make the best decision for our investors’ capital."
       }
     ],
     investorPerformance: [
@@ -395,21 +368,21 @@ const defaultTextContent: TextContent = {
         industry: "Luxury retail",
         investment: "Acquisition, 2015",
         outcome: ">500% revenue growth with ~30% net margins and a franchise expansion",
-        multiple: "Exit in negotiations"
+        multiple: "Exit in negotiations, >5x expected"
       },
       {
         company: "123Credit",
         industry: "Fintech marketplace",
         investment: "Growth equity, 2022",
         outcome: "Revenue expected to exceed €4M by 2025 with strong lender partnerships",
-        multiple: "42% stake"
+        multiple: "Exit in negotiations, >3x expected"
       },
       {
         company: "Dumagas Transport",
         industry: "Logistics & freight",
         investment: "Buyout, 2023",
         outcome: "Launched sales division, added €20M new business and doubled EBITDA to €3.8M",
-        multiple: "Debt reduced ~30%"
+        multiple: "Exit in negotiations, >3x expected"
       }
     ]
   },
