@@ -1,7 +1,7 @@
 import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
-import { StrategySection } from "./components/StrategySection";
 import { TeamSection } from "./components/TeamSection";
+import { StrategySection } from "./components/StrategySection";
 import { InsightsSection } from "./components/InsightsSection";
 import { MediaSection } from "./components/MediaSection";
 import { ResultsSection } from "./components/ResultsSection";
@@ -20,8 +20,8 @@ export default function App() {
           <Header />
           <main>
             <HeroSection />
-            <StrategySection />
             <TeamSection />
+            <StrategySection />
             <InsightsSection />
             <MediaSection />
             <ResultsSection />

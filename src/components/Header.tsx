@@ -52,24 +52,24 @@ export function Header() {
                 value={textContent.header.navigation.home}
               />
             </a>
-            <a 
-              href="#strategy" 
-              className="text-body transition-colors hover:opacity-80"
-              style={{color: 'var(--forest-light)'}}
-            >
-              <EditableText
-                path="header.navigation.strategy"
-                value={textContent.header.navigation.strategy}
-              />
-            </a>
-            <a 
-              href="#team" 
+            <a
+              href="#team"
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
               <EditableText
                 path="header.navigation.team"
                 value={textContent.header.navigation.team}
+              />
+            </a>
+            <a
+              href="#strategy"
+              className="text-body transition-colors hover:opacity-80"
+              style={{color: 'var(--forest-light)'}}
+            >
+              <EditableText
+                path="header.navigation.strategy"
+                value={textContent.header.navigation.strategy}
               />
             </a>
             <a 

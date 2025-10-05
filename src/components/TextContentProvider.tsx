@@ -195,12 +195,12 @@ const defaultTextContent: TextContent = {
         label: "Target commitments"
       },
       companies: {
-        value: ">2,000",
+        value: ">16",
         label: "Deal Pipeline"
       },
       successRate: {
-        value: "Growth equity, late-stage VC & special situations",
-        label: "Investment focus across under-capitalized sectors"
+        value: "€2–7M",
+        label: "Investment Focus"
       }
     }
   },
