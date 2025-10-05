@@ -37,7 +37,7 @@ export function ContactSection() {
     {
       icon: Clock,
       label: "Business Hours",
-      value: "Monday - Friday, 9:00 AM - 6:00 PM",
+      value: "Monday – Friday, 09:00 AM – 06:00 PM (EET)",
       href: "#"
     }
   ];
@@ -48,7 +48,7 @@ export function ContactSection() {
         {/* Color Picker Button */}
         <button
           onClick={() => setShowColorPicker(true)}
-          className="absolute top-4 right-4 z-20 p-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all"
+          className="hidden absolute top-4 right-4 z-20 p-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all"
           title="Edit Colors"
         >
           <Palette className="w-5 h-5 text-white" />
@@ -120,11 +120,11 @@ export function ContactSection() {
             <div className="backdrop-blur-sm rounded-lg p-6 border" style={{backgroundColor: 'rgba(45, 90, 69, 0.3)', borderColor: 'rgba(74, 124, 89, 0.3)'}}>
               <h4 className="text-card-title text-white mb-3">Investment Criteria</h4>
               <ul className="space-y-2 text-body text-blue-100">
-                <li>• Technology-focused companies</li>
-                <li>• Revenue stage businesses ($1M+ ARR)</li>
-                <li>• Eastern European market presence</li>
-                <li>• Scalable business models</li>
-                <li>• Strong founding teams</li>
+                <li>• Technology-enabled or traditional sectors requiring modernization</li>
+                <li>• Revenue stage businesses with ≥ €1M ARR and strong unit economics</li>
+                <li>• Eastern European presence with potential for regional expansion</li>
+                <li>• Scalable models via organic growth, buy-and-build or technology adoption</li>
+                <li>• Founders committed to partnership, professionalization and ESG best practices</li>
               </ul>
             </div>
           </div>

@@ -171,7 +171,7 @@ export interface TextContent {
 // Default text content
 const defaultTextContent: TextContent = {
   header: {
-    brandName: "OMNIA CAPITAL",
+    brandName: "OMNIA PRIME",
     navigation: {
       home: "Home",
       strategy: "Strategy",
@@ -183,92 +183,91 @@ const defaultTextContent: TextContent = {
   },
   
   hero: {
-    headline: "Creștem platforme profitabile prin execuție operațională",
-    description: "Omnia Capital combines strategic vision with operational excellence to build and scale profitable technology platforms. We partner with exceptional founders to create sustainable competitive advantages.",
+    headline: "We turn under-capitalized sectors into regional leaders",
+    description: "Omnia Prime is a growth‑equity fund focused on Romania and the broader Balkans and invests in under‑capitalized sectors such as digital transformation, logistics, business and industrial services, manufacturing and other traditional industries. By pairing strategic vision with hands‑on operational excellence, we partner with exceptional founders to unlock growth and create sustainable competitive advantages.",
     buttons: {
       primary: "Partner With Us",
       secondary: "View Portfolio"
     },
     metrics: {
       aum: {
-        value: "€462M",
-        label: "Assets Under Management"
+        value: "€50–70M",
+        label: "Target commitments"
       },
       companies: {
-        value: "16+",
-        label: "Portfolio Companies"
+        value: ">2,000",
+        label: "Deal Pipeline"
       },
       successRate: {
-        value: "95%",
-        label: "Success Rate"
+        value: "Growth equity, late-stage VC & special situations",
+        label: "Investment focus across under-capitalized sectors"
       }
     }
   },
   
   strategy: {
     title: "Strategy",
-    description: "Our three-pillar approach ensures sustainable growth and exceptional returns through strategic development, operational excellence, and outcome-focused execution.",
+    description: "Our strategy combines growth capital with operational know-how to build profitable platforms in overlooked sectors that are essential to Eastern Europe’s development.",
     pillars: {
       development: {
         title: "Development",
-        description: "We identify and develop emerging technology platforms with strong market potential and scalable business models that can drive sustainable growth.",
+        description: "We concentrate on industrial, logistics, business services, manufacturing and other traditional industries that have lacked professional capital and modernization.",
         features: [
-          "Market Research & Analysis - Deep dive into sector trends and competitive landscapes",
-          "Product Development - Technical due diligence and product roadmap optimization", 
-          "Technology Infrastructure - Scalable architecture and platform development",
-          "Team Building - Recruiting top talent and building high-performance teams"
+          "Sector focus: Industrial and manufacturing companies, logistics providers, business services, B2B SaaS platforms, selective consumer businesses and other under-capitalized sectors",
+          "Flexible deal mix: 60–70% growth equity stakes, 20–30% late-stage venture investments and up to 20% opportunistic special situations",
+          "Ticket sizes: €2–3 million for venture rounds and €6–7 million for buyout/control transactions",
+          "Geographic reach: Deploy EIF capital in Romania with selective deals across the Balkans and Central-Eastern Europe"
         ]
       },
       operations: {
         title: "Operations",
-        description: "Our operational expertise helps portfolio companies optimize processes, improve efficiency, and accelerate growth through proven methodologies.",
+        description: "We pair active ownership with commercial acceleration and disciplined execution to unlock growth from day one.",
         features: [
-          "Process Optimization - Streamlining workflows and eliminating inefficiencies",
-          "Operational Excellence - Implementing best-in-class operational frameworks",
-          "Strategic Partnerships - Building key relationships across the value chain",
-          "Resource Allocation - Optimizing capital deployment and human resources"
+          "Active management & board involvement: Secure board seats or observer roles, build leadership teams and intervene quickly when change is required",
+          "Strategic & commercial acceleration: Install structured sales processes, pricing discipline and CRM-driven pipeline management",
+          "Operational efficiency & professionalisation: Launch 100-day plans covering IT upgrades, refinancing, governance and zero-based budgeting",
+          "Flexible ownership: Comfortable with minority or majority stakes, aligning incentives through board rights and earn-outs"
         ]
       },
       outcomes: {
         title: "Outcomes",
-        description: "We focus on sustainable, measurable outcomes that create long-term value for all stakeholders through data-driven approaches.",
+        description: "Our approach delivers measurable value creation and embeds ESG improvements across every investment.",
         features: [
-          "Performance Metrics - KPI tracking and data-driven decision making",
-          "Value Creation - Sustainable growth strategies and market expansion",
-          "Exit Strategies - Strategic planning for optimal exit timing and valuation",
-          "Stakeholder Returns - Maximizing returns for investors, founders, and employees"
+          "Value creation and impact: Deliver top-quartile returns while accelerating Romania’s industrial and digital transformation",
+          "Measured results: Track revenue growth, margin improvement, return on capital, job creation and ESG progress",
+          "ESG integration: Apply a ‘do no significant harm’ principle with proactive upgrades to energy efficiency, inclusion and governance"
         ]
       }
     }
   },
-  
+
   team: {
     title: "Leadership Team",
-    description: "Our experienced team combines deep industry expertise with operational excellence to drive exceptional results for our portfolio companies.",
+    description: "Omnia Prime’s leadership combines growth investing, sales acceleration and operational transformation expertise tailored to Romania and the broader Balkans.",
     members: [
       {
-        name: "Alexandra Chen",
-        role: "Managing Partner",
-        bio: "Former McKinsey partner with 15+ years of strategic consulting experience across technology and healthcare sectors.",
-        experience: "15+ years experience"
+        name: "Matei Ladea",
+        role: "General Partner (Managing Partner)",
+        bio: "Serial entrepreneur and M&A specialist who launched Lidl across Eastern Europe, completed Harvard Business School and sustainable-investing programs, and led the buyout of bespoke suit maker SARTO to >500% revenue growth and ~30% net margins. Leads fundraising, origination and strategy while mentoring founders on sustainable scaling and ESG.",
+        experience: "Fundraising, origination & strategy leadership"
       },
       {
-        name: "David Rodriguez",
-        role: "Investment Partner", 
-        bio: "Ex-Goldman Sachs VP with expertise in growth equity and technology investments across Europe and North America.",
-        experience: "12+ years experience"
+        name: "Bogdan Georgescu",
+        role: "General Partner (Managing Partner)",
+        bio: "Banking, trading and sales-management expert who founded SAGE Petrochem and co-founded an SEC-registered investment advisory. Renowned sales coach with 1,500+ professionals trained, leading deal execution, due diligence and portfolio value-creation while monitoring macro risks.",
+        experience: "Deal execution & commercial acceleration"
       },
       {
-        name: "Sarah Mitchell",
-        role: "Operating Partner",
-        bio: "Former CTO of three successful tech startups with deep expertise in scaling technology platforms and building high-performing teams.",
-        experience: "18+ years experience"
+        name: "Laurentiu Pruna",
+        role: "Investment Manager",
+        bio: "Operator-turned-project leader with finance background and Lean Six Sigma Black Belt who scaled Delivery Hero and Bolt Market operations, launched new markets, built advertising streams and led commercial execution at SARTO. Translates diligence into 100-day plans that drive EBITDA expansion.",
+        experience: "Operational excellence & market expansion"
       },
       {
-        name: "Michael Thompson",
-        role: "Principal",
-        bio: "Former management consultant at McKinsey & Company with specialized focus on technology sector investments and operational transformations across Central and Eastern Europe.",
-        experience: "10+ years experience"
+        name: "Alexandru Andries",
+        role: "Investment Analyst",
+        bio: "Engineer and entrepreneur who served as COO of Kopilot by Smart Diesel, launching digital applications for trucking. Leads industry research, financial analysis and CRM-driven sourcing while implementing organisational tools that improve portfolio company structure and culture.",
+        experience: "Data-driven sourcing & portfolio analytics"
       }
     ]
   },
@@ -303,10 +302,10 @@ const defaultTextContent: TextContent = {
   
   media: {
     title: "Media Coverage",
-    description: "Recent coverage and recognition of Omnia Capital's investment approach and portfolio company successes.",
+    description: "Recent coverage and recognition of Omnia Prime's investment approach and portfolio company successes.",
     coverage: [
       {
-        title: "Omnia Capital Leads €25M Series B in TechFlow",
+        title: "Omnia Prime Leads €25M Series B in TechFlow",
         publication: "European Private Equity",
         date: "March 20, 2024",
         excerpt: "Investment focuses on scaling TechFlow's AI-powered workflow automation platform across European markets."
@@ -315,111 +314,111 @@ const defaultTextContent: TextContent = {
         title: "The Rise of Operational Private Equity in Europe",
         publication: "Financial Times",
         date: "March 12, 2024", 
-        excerpt: "Omnia Capital featured as a leading example of hands-on investment approach driving superior returns."
+        excerpt: "Omnia Prime featured as a leading example of hands-on investment approach driving superior returns."
       },
       {
         title: "Sustainability in Tech Investments",
         publication: "TechCrunch Europe",
         date: "February 25, 2024",
-        excerpt: "How Omnia Capital integrates ESG principles into its investment thesis and portfolio management."
+        excerpt: "How Omnia Prime integrates ESG principles into its investment thesis and portfolio management."
       }
     ]
   },
   
   results: {
     title: "Track Record",
-    description: "Our disciplined approach and operational expertise have delivered consistent superior returns across market cycles.",
+    description: "By combining sector-specific expertise, commercial acceleration and operational excellence, Omnia Prime delivers top-quartile returns while supporting Romania’s industrial and digital transformation.",
     metrics: [
       {
-        label: "Net IRR",
-        value: "28.4%",
-        description: "Across all funds since inception"
+        label: "Value creation & impact",
+        value: "Top-quartile returns",
+        description: "Hands-on partnership unlocks sustainable competitive advantages across traditional industries."
       },
       {
-        label: "Revenue Growth",
-        value: "4.2x",
-        description: "Average portfolio company growth"
+        label: "Measured results",
+        value: "EBITDA 2x at Dumagas",
+        description: "Turnaround doubled EBITDA from €1.9M to €3.8M, lifted net profit to ~€2M and reduced debt by ~30%."
       },
       {
-        label: "Job Creation",
-        value: "2,400+",
-        description: "New positions across portfolio"
+        label: "Job creation",
+        value: "250+ roles",
+        description: "Portfolio companies have created over 250 new jobs, 95% of which are held by Romanian citizens."
       },
       {
-        label: "Market Cap",
-        value: "€1.8B",
-        description: "Combined portfolio valuation"
+        label: "ESG integration",
+        value: "Article 6 with upgrades",
+        description: "Screening investments and implementing energy efficiency, inclusive employment and governance best practices."
       }
     ],
     performanceMetrics: [
       {
-        label: "Portfolio Growth",
+        label: "Revenue growth",
+        value: 90,
+        description: "Average top-line expansion achieved through commercial acceleration initiatives."
+      },
+      {
+        label: "Margin improvement",
+        value: 88,
+        description: "Disciplined operational upgrades translate into sustained profitability gains."
+      },
+      {
+        label: "Return on capital",
         value: 85,
-        description: "Year-over-year portfolio value increase"
+        description: "Focused capital allocation and refinancing strategies enhance capital efficiency."
       },
       {
-        label: "Operational Efficiency", 
-        value: 92,
-        description: "Process optimization and cost reduction"
-      },
-      {
-        label: "Market Expansion",
-        value: 78,
-        description: "New market penetration success rate"
-      },
-      {
-        label: "Revenue Growth",
-        value: 89,
-        description: "Portfolio company revenue increase"
+        label: "ESG progress",
+        value: 82,
+        description: "Portfolio-wide improvements in governance, energy efficiency and inclusive employment."
       }
     ],
     investorPerformance: [
       {
         metric: "Net IRR",
-        value: "15.2%",
-        description: "Internal Rate of Return"
+        value: "15%+",
+        description: "Targeting mid-teens internal rates of return."
       },
       {
-        metric: "DPI Multiple",
-        value: "2.8x",
-        description: "Distributions to Paid-In Capital"
+        metric: "DPI",
+        value: "2.5x–3.0x",
+        description: "Projected distributions to paid-in capital over the fund’s life."
       },
       {
-        metric: "Success Rate",
-        value: "95%",
-        description: "Profitable Exits"
+        metric: "Success rate",
+        value: "100%",
+        description: "Meaningful value creation in every principal investment to date."
       }
     ],
     portfolioHighlights: [
       {
-        company: "TechFlow",
-        industry: "Workflow Automation",
-        investment: "Series A, 2022",
-        outcome: "3.2x revenue growth",
-        multiple: "4.1x"
+        company: "SARTO",
+        industry: "Luxury retail",
+        investment: "Acquisition, 2015",
+        outcome: ">500% revenue growth with ~30% net margins and a franchise expansion",
+        multiple: "Exit in negotiations"
       },
       {
-        company: "DataVault",
-        industry: "Cybersecurity",
-        investment: "Growth, 2021",
-        outcome: "Exit to Cisco",
-        multiple: "5.8x"
+        company: "123Credit",
+        industry: "Fintech marketplace",
+        investment: "Growth equity, 2022",
+        outcome: "Revenue expected to exceed €4M by 2025 with strong lender partnerships",
+        multiple: "42% stake"
       },
       {
-        company: "CloudScale",
-        industry: "Infrastructure",
-        investment: "Series B, 2020",
-        outcome: "IPO 2023",
-        multiple: "7.2x"
+        company: "Dumagas Transport",
+        industry: "Logistics & freight",
+        investment: "Buyout, 2023",
+        outcome: "Launched sales division, added €20M new business and doubled EBITDA to €3.8M",
+        multiple: "Debt reduced ~30%"
       }
     ]
   },
-  
+
   contact: {
     title: "Get in Touch",
-    description: "Ready to partner with us? We'd love to hear from exceptional entrepreneurs and co-investors.",
+    description: "We welcome partnerships with exceptional entrepreneurs and co-investors who share our vision for transforming Eastern Europe’s economy. Please use the contact details above to discuss opportunities—we typically respond within 24 hours.",
     office: {
-      title: "Bucharest Office",
+      title: "Head Office",
       address: "Aleea Alexandru 30, Bucharest, Romania",
       phone: "+40 721 596 298",
       email: "invest@omnia.capital"
@@ -432,10 +431,10 @@ const defaultTextContent: TextContent = {
       submitButton: "Send Message"
     }
   },
-  
+
   footer: {
-    brandName: "OMNIA CAPITAL",
-    description: "Building profitable technology platforms through operational excellence and strategic vision.",
+    brandName: "OMNIA PRIME",
+    description: "Growth-equity fund transforming Romania and the Balkans through operational excellence and strategic vision.",
     sections: {
       company: {
         title: "Company",
@@ -465,7 +464,7 @@ const defaultTextContent: TextContent = {
         ]
       }
     },
-    copyright: "© 2024 Omnia Capital. All rights reserved."
+    copyright: "© 2024 Omnia Prime. All rights reserved."
   }
 };
 

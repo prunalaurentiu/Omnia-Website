@@ -17,7 +17,7 @@ export function TextEditingToolbar() {
   };
 
   return (
-    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-2 flex items-center gap-2">
+    <div className="hidden fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-2 flex items-center gap-2">
       <Type className="w-5 h-5 text-gray-600" />
       
       <div className="h-6 w-px bg-gray-200" />
@@ -26,7 +26,7 @@ export function TextEditingToolbar() {
         onClick={handleToggleEditing}
         variant={isEditing ? "default" : "outline"}
         size="sm"
-        className="flex items-center gap-2"
+        className="hidden flex items-center gap-2"
       >
         <Edit3 className="w-4 h-4" />
         {isEditing ? 'Exit Editing' : 'Edit Text'}
