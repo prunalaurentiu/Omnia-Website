@@ -80,14 +80,21 @@ export function ResultsSection() {
           />
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h3 className="text-card-title text-slate-900 mb-10 text-center">Key Achievements</h3>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
             {keyAchievements.map((achievement, index) => {
               const Icon = achievement.icon;
               return (
-                <div key={index} className="bg-white rounded-lg p-8 border shadow-md transition-shadow duration-200 hover:shadow-lg text-center" style={{borderColor: colors.borderColor}}>
-                  <div className="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-6" style={{backgroundColor: colors.primaryAccent}}>
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-6 border shadow-sm transition-all duration-200 hover:shadow-md w-full max-w-xs sm:max-w-sm text-center"
+                  style={{ borderColor: colors.borderColor }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-6"
+                    style={{ backgroundColor: colors.primaryAccent }}
+                  >
                     <Icon className="w-7 h-7 text-white" />
                   </div>
                   <EditableText

@@ -407,7 +407,7 @@ const defaultTextContent: TextContent = {
 
   footer: {
     brandName: "OMNIA PRIME",
-    description: "Growth-equity fund transforming Romania and the Balkans through operational excellence and strategic vision.",
+    description: "Dedicated growth-equity partner supporting Eastern Europe with institutional capital and hands-on execution.",
     sections: {
       company: {
         title: "Company",
