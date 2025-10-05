@@ -1,4 +1,3 @@
-import { Button } from "./ui/button";
 import { Palette } from "lucide-react";
 import { useState } from "react";
 import { LightColorPicker } from "./LightColorPicker";
@@ -10,6 +9,13 @@ export function HeroSection() {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const { colors, setColors } = useSectionColors('hero', false);
   const { textContent } = useTextContent();
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
   
   return (
     <>
@@ -64,11 +70,13 @@ export function HeroSection() {
                 value={textContent.hero.buttons.primary}
                 className="px-6 py-3 rounded-md text-white hover:opacity-90 hover:scale-105 transition-all duration-200"
                 style={{backgroundColor: colors.primaryAccent}}
+                onClick={() => scrollToSection('contact')}
               />
               <EditableButton
                 path="hero.buttons.secondary"
                 value={textContent.hero.buttons.secondary}
                 className="px-6 py-3 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-50 hover:scale-105 transition-all duration-200"
+                onClick={() => scrollToSection('results')}
               />
             </div>
 

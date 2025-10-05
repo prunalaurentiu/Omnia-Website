@@ -4,16 +4,71 @@ import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Mail, Phone, MapPin, Clock, Palette } from "lucide-react";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { ColorPicker } from "./ColorPicker";
 import { useSectionColors } from "./SectionColorProvider";
 import { EditableText } from "./EditableText";
 import { useTextContent } from "./TextContentProvider";
 
+type FormStatus = "idle" | "submitting" | "success" | "error";
+
 export function ContactSection() {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const { colors, setColors } = useSectionColors('contact', true);
   const { textContent } = useTextContent();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    subject: "",
+    message: ""
+  });
+  const [formStatus, setFormStatus] = useState<FormStatus>("idle");
+  const [formFeedback, setFormFeedback] = useState("");
+
+  const handleInputChange = (
+    field: keyof typeof formData
+  ) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const value = event.target.value;
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!formData.firstName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setFormStatus("error");
+      setFormFeedback("Please complete the required fields before submitting.");
+      return;
+    }
+
+    setFormStatus("submitting");
+    setFormFeedback("");
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 600));
+
+      setFormStatus("success");
+      setFormFeedback("Thanks for reaching out. Our team will respond within 24 hours.");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        subject: "",
+        message: ""
+      });
+    } catch (error) {
+      setFormStatus("error");
+      setFormFeedback("Something went wrong. Please try again.");
+    }
+  };
+
+  const isSubmitting = formStatus === "submitting";
   
   const contactInfo = [
     {
@@ -136,49 +191,107 @@ export function ContactSection() {
                 Fill out the form below and we'll get back to you within 24 hours.
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" placeholder="John" />
+            <CardContent>
+              <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      placeholder="John"
+                      autoComplete="given-name"
+                      required
+                      value={formData.firstName}
+                      onChange={handleInputChange('firstName')}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      placeholder="Doe"
+                      autoComplete="family-name"
+                      value={formData.lastName}
+                      onChange={handleInputChange('lastName')}
+                      disabled={isSubmitting}
+                    />
+                  </div>
                 </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" placeholder="Doe" />
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="john@company.com"
+                    autoComplete="email"
+                    required
+                    value={formData.email}
+                    onChange={handleInputChange('email')}
+                    disabled={isSubmitting}
+                  />
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="john@company.com" />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="company">Company</Label>
+                  <Input
+                    id="company"
+                    placeholder="Your Company"
+                    autoComplete="organization"
+                    value={formData.company}
+                    onChange={handleInputChange('company')}
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="company">Company</Label>
-                <Input id="company" placeholder="Your Company" />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="subject">Subject</Label>
+                  <Input
+                    id="subject"
+                    placeholder="Investment Opportunity"
+                    autoComplete="off"
+                    value={formData.subject}
+                    onChange={handleInputChange('subject')}
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="subject">Subject</Label>
-                <Input id="subject" placeholder="Investment Opportunity" />
-              </div>
+                <div className="space-y-2">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Tell us about your company and how we can help..."
+                    rows={6}
+                    required
+                    value={formData.message}
+                    onChange={handleInputChange('message')}
+                    disabled={isSubmitting}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <Textarea 
-                  id="message" 
-                  placeholder="Tell us about your company and how we can help..."
-                  rows={6}
-                />
-              </div>
+                <Button
+                  className="w-full"
+                  size="lg"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending…' : 'Send Message'}
+                </Button>
 
-              <Button className="w-full" size="lg">
-                Send Message
-              </Button>
-
-              <div className="text-center text-caption text-slate-500">
-                By submitting this form, you agree to our privacy policy.
-              </div>
+                <div
+                  className={`text-center text-caption ${
+                    formStatus === 'success'
+                      ? 'text-emerald-600'
+                      : formStatus === 'error'
+                        ? 'text-red-600'
+                        : 'text-slate-500'
+                  }`}
+                  aria-live="polite"
+                >
+                  {formFeedback || 'By submitting this form, you agree to our privacy policy.'}
+                </div>
+              </form>
             </CardContent>
           </Card>
         </div>
