@@ -1,4 +1,4 @@
-import { Users, DollarSign, Palette, Target } from "lucide-react";
+import { Palette } from "lucide-react";
 import { useState } from "react";
 import { LightColorPicker } from "./LightColorPicker";
 import { useSectionColors } from "./SectionColorProvider";
@@ -10,28 +10,8 @@ export function ResultsSection() {
   const { colors, setColors } = useSectionColors('results', false);
   const { textContent } = useTextContent();
   
-  const keyAchievements = [
-    {
-      icon: DollarSign,
-      title: textContent.results.metrics[1].value,
-      subtitle: textContent.results.metrics[1].label,
-      description: textContent.results.metrics[1].description
-    },
-    {
-      icon: Users,
-      title: textContent.results.metrics[2].value,
-      subtitle: textContent.results.metrics[2].label,
-      description: textContent.results.metrics[2].description
-    },
-    {
-      icon: Target,
-      title: textContent.results.metrics[3].value,
-      subtitle: textContent.results.metrics[3].label,
-      description: textContent.results.metrics[3].description
-    }
-  ];
-
   const investorPerformance = textContent.results.investorPerformance;
+  const keyAchievements = textContent.results.metrics;
 
   return (
     <>
@@ -63,159 +43,154 @@ export function ResultsSection() {
           ></div>
         </div>
         
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <EditableText
-            path="results.title"
-            value={textContent.results.title}
-            as="h2"
-            className="text-section text-slate-900 mb-4"
-          />
-          <EditableText
-            path="results.description"
-            value={textContent.results.description}
-            as="p"
-            className="text-body text-slate-600 max-w-3xl mx-auto"
-            multiline
-          />
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-card-title text-slate-900 mb-10 text-center">Key Achievements</h3>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
-            {keyAchievements.map((achievement, index) => {
-              const Icon = achievement.icon;
-              return (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl p-6 border shadow-sm transition-all duration-200 hover:shadow-md w-full max-w-xs sm:max-w-sm text-center"
-                  style={{ borderColor: colors.borderColor }}
-                >
-                  <div
-                    className="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-6"
-                    style={{ backgroundColor: colors.primaryAccent }}
-                  >
-                    <Icon className="w-7 h-7 text-white" />
-                  </div>
-                  <EditableText
-                    path={`results.metrics.${index + 1}.value`}
-                    value={achievement.title}
-                    className="text-metric text-slate-900 mb-2 block"
-                  />
-                  <EditableText
-                    path={`results.metrics.${index + 1}.label`}
-                    value={achievement.subtitle}
-                    className="text-body font-semibold mb-3 block"
-                    style={{color: colors.primaryAccent}}
-                  />
-                  <EditableText
-                    path={`results.metrics.${index + 1}.description`}
-                    value={achievement.description}
-                    className="text-caption text-slate-600"
-                    multiline
-                  />
-                </div>
-              );
-            })}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <EditableText
+              path="results.title"
+              value={textContent.results.title}
+              as="h2"
+              className="text-section text-slate-900 mb-4"
+            />
+            <EditableText
+              path="results.description"
+              value={textContent.results.description}
+              as="p"
+              className="text-body text-slate-600 max-w-3xl mx-auto"
+              multiline
+            />
           </div>
-        </div>
 
-        {/* Portfolio Highlights */}
-        <div className="mt-20">
-          <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
-            <div className="text-center mb-8">
-              <h3 className="text-card-title text-slate-900 mb-2">Portfolio Highlights</h3>
-              <p className="text-body text-slate-600">Key investments demonstrating our operational excellence approach</p>
+          <div className="mt-16">
+            <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
+              <div className="text-center mb-8">
+                <h3 className="text-card-title text-slate-900 mb-2">Key Achievements</h3>
+                <p className="text-body text-slate-600">Operational excellence translated into measurable outcomes across the portfolio</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {keyAchievements.map((achievement, index) => (
+                  <div key={index} className="text-center group hover:scale-110 transition-all duration-200 cursor-pointer">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+                      <div className="text-metric group-hover:scale-105 transition-transform duration-200" style={{color: colors.primaryAccent}}>
+                        <EditableText
+                          path={`results.metrics.${index}.value`}
+                          value={achievement.value}
+                        />
+                      </div>
+                      <div className="text-body text-slate-700 font-semibold mb-1">
+                        <EditableText
+                          path={`results.metrics.${index}.label`}
+                          value={achievement.label}
+                        />
+                      </div>
+                      <div className="text-caption text-slate-500">
+                        <EditableText
+                          path={`results.metrics.${index}.description`}
+                          value={achievement.description}
+                          multiline
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Company</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Industry</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Investment</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Outcome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Multiple</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {textContent.results.portfolioHighlights.map((highlight, index) => (
-                    <tr key={index} className="border-b border-gray-100">
-                      <td className="py-3 px-4 font-medium text-slate-900">
-                        <EditableText
-                          path={`results.portfolioHighlights.${index}.company`}
-                          value={highlight.company}
-                        />
-                      </td>
-                      <td className="py-3 px-4 text-slate-600">
-                        <EditableText
-                          path={`results.portfolioHighlights.${index}.industry`}
-                          value={highlight.industry}
-                        />
-                      </td>
-                      <td className="py-3 px-4 text-slate-600">
-                        <EditableText
-                          path={`results.portfolioHighlights.${index}.investment`}
-                          value={highlight.investment}
-                        />
-                      </td>
-                      <td className="py-3 px-4 text-slate-600">
-                        <EditableText
-                          path={`results.portfolioHighlights.${index}.outcome`}
-                          value={highlight.outcome}
-                        />
-                      </td>
-                      <td className="py-3 px-4 font-semibold text-green-600">
-                        <EditableText
-                          path={`results.portfolioHighlights.${index}.multiple`}
-                          value={highlight.multiple}
-                        />
-                      </td>
+          </div>
+          {/* Portfolio Highlights */}
+          <div className="mt-20">
+            <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
+              <div className="text-center mb-8">
+                <h3 className="text-card-title text-slate-900 mb-2">Portfolio Highlights</h3>
+                <p className="text-body text-slate-600">Key investments demonstrating our operational excellence approach</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Company</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Industry</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Investment</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Outcome</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Multiple</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {textContent.results.portfolioHighlights.map((highlight, index) => (
+                      <tr key={index} className="border-b border-gray-100">
+                        <td className="py-3 px-4 font-medium text-slate-900">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.company`}
+                            value={highlight.company}
+                          />
+                        </td>
+                        <td className="py-3 px-4 text-slate-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.industry`}
+                            value={highlight.industry}
+                          />
+                        </td>
+                        <td className="py-3 px-4 text-slate-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.investment`}
+                            value={highlight.investment}
+                          />
+                        </td>
+                        <td className="py-3 px-4 text-slate-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.outcome`}
+                            value={highlight.outcome}
+                          />
+                        </td>
+                        <td className="py-3 px-4 font-semibold text-green-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.multiple`}
+                            value={highlight.multiple}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Investor Performance Section */}
-        <div className="mt-20">
-          <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
-            <div className="text-center mb-8">
-              <h3 className="text-card-title text-slate-900 mb-2">Investor Performance</h3>
-              <p className="text-body text-slate-600">Track record of delivering exceptional returns to our investors</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              {investorPerformance.map((item, index) => (
-                <div key={index} className="text-center group hover:scale-110 transition-all duration-200 cursor-pointer">
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
-                    <div className="text-metric group-hover:scale-105 transition-transform duration-200" style={{color: colors.primaryAccent}}>
-                      <EditableText
-                        path={`results.investorPerformance.${index}.value`}
-                        value={item.value}
-                      />
-                    </div>
-                    <div className="text-body text-slate-700 font-semibold mb-1">
-                      <EditableText
-                        path={`results.investorPerformance.${index}.metric`}
-                        value={item.metric}
-                      />
-                    </div>
-                    <div className="text-caption text-slate-500">
-                      <EditableText
-                        path={`results.investorPerformance.${index}.description`}
-                        value={item.description}
-                      />
+          {/* Investor Performance Section */}
+          <div className="mt-20">
+            <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
+              <div className="text-center mb-8">
+                <h3 className="text-card-title text-slate-900 mb-2">Investor Performance</h3>
+                <p className="text-body text-slate-600">Track record of delivering exceptional returns to our investors</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {investorPerformance.map((item, index) => (
+                  <div key={index} className="text-center group hover:scale-110 transition-all duration-200 cursor-pointer">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+                      <div className="text-metric group-hover:scale-105 transition-transform duration-200" style={{color: colors.primaryAccent}}>
+                        <EditableText
+                          path={`results.investorPerformance.${index}.value`}
+                          value={item.value}
+                        />
+                      </div>
+                      <div className="text-body text-slate-700 font-semibold mb-1">
+                        <EditableText
+                          path={`results.investorPerformance.${index}.metric`}
+                          value={item.metric}
+                        />
+                      </div>
+                      <div className="text-caption text-slate-500">
+                        <EditableText
+                          path={`results.investorPerformance.${index}.description`}
+                          value={item.description}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     
     {showColorPicker && (
       <LightColorPicker
