@@ -1,114 +1,170 @@
-import { Progress } from "./ui/progress";
-import { TrendingUp, Users, DollarSign, Briefcase } from "lucide-react";
+import { Palette } from "lucide-react";
+import { useState } from "react";
+import { LightColorPicker } from "./LightColorPicker";
+import { useSectionColors } from "./SectionColorProvider";
+import { EditableText } from "./EditableText";
+import { useTextContent } from "./TextContentProvider";
 
 export function ResultsSection() {
-  const metrics = [
-    { label: "Portfolio Growth", value: 85, color: "bg-blue-600" },
-    { label: "Operational Efficiency", value: 92, color: "bg-green-600" },
-    { label: "Market Expansion", value: 78, color: "bg-purple-600" },
-    { label: "Revenue Growth", value: 89, color: "bg-orange-600" }
-  ];
-
-  const achievements = [
-    {
-      icon: DollarSign,
-      title: "€462M AUM",
-      subtitle: "Assets Under Management",
-      description: "Total capital deployed across our portfolio"
-    },
-    {
-      icon: Briefcase,
-      title: "16+ Portfolio",
-      subtitle: "Active Investments",
-      description: "Companies in various stages of growth"
-    },
-    {
-      icon: TrendingUp,
-      title: "3.2x Average",
-      subtitle: "Return Multiple",
-      description: "Consistent outperformance across exits"
-    }
-  ];
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const { colors, setColors } = useSectionColors('results', false);
+  const { textContent } = useTextContent();
+  
+  const investorPerformance = textContent.results.investorPerformance;
 
   return (
-    <section id="results" className="py-20 text-white relative overflow-hidden" style={{background: 'linear-gradient(135deg, var(--racing-black), var(--racing-deep), var(--racing-medium))'}}>
-      {/* Financial charts inspired background */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 100 100">
-          <polyline
-            fill="none"
-            stroke="white"
-            strokeWidth="0.5"
-            points="0,50 20,30 40,45 60,25 80,35 100,20"
-          />
-          <polyline
-            fill="none"
-            stroke="white"
-            strokeWidth="0.3"
-            points="0,70 15,65 30,80 50,60 70,75 85,55 100,50"
-          />
-        </svg>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-section text-white mb-4">Results</h2>
-          <p className="text-body text-slate-300 max-w-2xl mx-auto">
-            Our track record demonstrates consistent value creation through 
-            strategic partnerships and operational excellence.
-          </p>
+    <>
+      <section id="results" className="py-20 relative overflow-hidden" style={{background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`}}>
+        {/* Color Picker Button */}
+        <button
+          onClick={() => setShowColorPicker(true)}
+          className="hidden absolute top-4 right-4 z-20 p-2 bg-black bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all"
+          title="Edit Colors"
+        >
+          <Palette className="w-5 h-5 text-slate-600" />
+        </button>
+        
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0">
+          <div 
+            className="absolute top-20 right-20 w-40 h-40 rounded-full blur-3xl"
+            style={{
+              backgroundColor: colors.accentCircle1,
+              opacity: colors.accentCircle1Opacity
+            }}
+          ></div>
+          <div 
+            className="absolute bottom-20 left-20 w-56 h-56 rounded-full blur-3xl"
+            style={{
+              backgroundColor: colors.accentCircle2,
+              opacity: colors.accentCircle2Opacity
+            }}
+          ></div>
         </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <EditableText
+              path="results.title"
+              value={textContent.results.title}
+              as="h2"
+              className="text-section text-slate-900 mb-4"
+            />
+            <EditableText
+              path="results.description"
+              value={textContent.results.description}
+              as="p"
+              className="text-body text-slate-600 max-w-3xl mx-auto"
+              multiline
+            />
+          </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <h3 className="text-card-title text-white mb-6">Performance Metrics</h3>
-            {metrics.map((metric, index) => (
-              <div key={index} className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-body text-slate-300">{metric.label}</span>
-                  <span className="text-body font-semibold text-white">{metric.value}%</span>
-                </div>
-                <Progress value={metric.value} className="h-3" />
+          {/* Portfolio Highlights */}
+          <div className="mt-16">
+            <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
+              <div className="text-center mb-8">
+                <h3 className="text-card-title text-slate-900 mb-2">Portfolio Highlights</h3>
+                <p className="text-body text-slate-600">Key investments demonstrating our operational excellence approach</p>
               </div>
-            ))}
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Company</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Industry</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Investment</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Outcome</th>
+                      <th className="text-left py-3 px-4 font-semibold text-slate-900">Multiple</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {textContent.results.portfolioHighlights.map((highlight, index) => (
+                      <tr key={index} className="border-b border-gray-100">
+                        <td className="py-3 px-4 font-medium text-slate-900">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.company`}
+                            value={highlight.company}
+                          />
+                        </td>
+                        <td className="py-3 px-4 text-slate-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.industry`}
+                            value={highlight.industry}
+                          />
+                        </td>
+                        <td className="py-3 px-4 text-slate-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.investment`}
+                            value={highlight.investment}
+                          />
+                        </td>
+                        <td className="py-3 px-4 text-slate-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.outcome`}
+                            value={highlight.outcome}
+                          />
+                        </td>
+                        <td className="py-3 px-4 font-semibold text-green-600">
+                          <EditableText
+                            path={`results.portfolioHighlights.${index}.multiple`}
+                            value={highlight.multiple}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 
-          <div className="grid gap-6">
-            {achievements.map((achievement, index) => {
-              const Icon = achievement.icon;
-              return (
-                <div key={index} className="backdrop-blur-sm rounded-lg p-6 flex items-start space-x-4 border" style={{backgroundColor: 'rgba(26, 61, 46, 0.4)', borderColor: 'rgba(77, 124, 89, 0.3)'}}>
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{backgroundColor: 'var(--emerald-accent)'}}>
-                    <Icon className="w-6 h-6 text-white" />
+          {/* Investor Performance Section */}
+          <div className="mt-20">
+            <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
+              <div className="text-center mb-8">
+                <h3 className="text-card-title text-slate-900 mb-2">Investor Performance</h3>
+                <p className="text-body text-slate-600">Track record of delivering exceptional returns to our investors</p>
+              </div>
+              <div className="grid md:grid-cols-3 gap-8">
+                {investorPerformance.map((item, index) => (
+                  <div key={index} className="text-center group hover:scale-110 transition-all duration-200 cursor-pointer">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+                      <div className="text-metric group-hover:scale-105 transition-transform duration-200" style={{color: colors.primaryAccent}}>
+                        <EditableText
+                          path={`results.investorPerformance.${index}.value`}
+                          value={item.value}
+                        />
+                      </div>
+                      <div className="text-body text-slate-700 font-semibold mb-1">
+                        <EditableText
+                          path={`results.investorPerformance.${index}.metric`}
+                          value={item.metric}
+                        />
+                      </div>
+                      <div className="text-caption text-slate-500">
+                        <EditableText
+                          path={`results.investorPerformance.${index}.description`}
+                          value={item.description}
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-metric text-white mb-1">{achievement.title}</div>
-                    <div className="text-body mb-2" style={{color: 'var(--emerald-light)'}}>{achievement.subtitle}</div>
-                    <div className="text-caption text-slate-300">{achievement.description}</div>
-                  </div>
-                </div>
-              );
-            })}
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="mt-16 rounded-lg p-8 text-center border" style={{background: 'linear-gradient(to right, var(--green-corporate), var(--forest-deep))', borderColor: 'rgba(22, 160, 133, 0.3)'}}>
-          <h3 className="text-xl text-white mb-4">Investor Performance</h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div>
-              <div className="text-3xl text-white mb-2">15.2%</div>
-              <div style={{color: 'var(--emerald-light)'}}>Net IRR</div>
-            </div>
-            <div>
-              <div className="text-3xl text-white mb-2">2.8x</div>
-              <div style={{color: 'var(--emerald-light)'}}>DPI Multiple</div>
-            </div>
-            <div>
-              <div className="text-3xl text-white mb-2">95%</div>
-              <div style={{color: 'var(--emerald-light)'}}>Success Rate</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    
+    {showColorPicker && (
+      <LightColorPicker
+        sectionId="results"
+        sectionName="Results"
+        onClose={() => setShowColorPicker(false)}
+        onColorsChange={setColors}
+        initialColors={colors}
+      />
+    )}
+    </>
   );
 }
