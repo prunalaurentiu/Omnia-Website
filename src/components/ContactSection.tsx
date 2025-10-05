@@ -3,26 +3,35 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Palette } from "lucide-react";
+import { useState } from "react";
+import { ColorPicker } from "./ColorPicker";
+import { useSectionColors } from "./SectionColorProvider";
+import { EditableText } from "./EditableText";
+import { useTextContent } from "./TextContentProvider";
 
 export function ContactSection() {
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const { colors, setColors } = useSectionColors('contact', true);
+  const { textContent } = useTextContent();
+  
   const contactInfo = [
     {
       icon: Mail,
       label: "Email",
-      value: "contact@nexuscapital.com",
-      href: "mailto:contact@nexuscapital.com"
+      value: textContent.contact.office.email,
+      href: `mailto:${textContent.contact.office.email}`
     },
     {
       icon: Phone,
-      label: "Phone",
-      value: "+40 21 123 4567",
-      href: "tel:+40211234567"
+      label: "Phone", 
+      value: textContent.contact.office.phone,
+      href: `tel:${textContent.contact.office.phone.replace(/\s/g, '')}`
     },
     {
       icon: MapPin,
       label: "Address",
-      value: "Calea Victoriei 155, Bucharest, Romania",
+      value: textContent.contact.office.address,
       href: "#"
     },
     {
@@ -34,19 +43,47 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-20 text-white relative overflow-hidden" style={{background: 'linear-gradient(135deg, var(--green-corporate), var(--forest-deep))'}}>
-      {/* Subtle background elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-44 h-44 bg-white rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-60 h-60 bg-blue-300 rounded-full blur-3xl"></div>
-      </div>
+    <>
+      <section id="contact" className="py-20 text-white relative overflow-hidden" style={{background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`}}>
+        {/* Color Picker Button */}
+        <button
+          onClick={() => setShowColorPicker(true)}
+          className="absolute top-4 right-4 z-20 p-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all"
+          title="Edit Colors"
+        >
+          <Palette className="w-5 h-5 text-white" />
+        </button>
+        
+        {/* Geometric accent circles */}
+        <div 
+          className="absolute top-0 right-0 w-80 h-80 rounded-full transform translate-x-24 -translate-y-24"
+          style={{
+            backgroundColor: colors.accentCircle1,
+            opacity: colors.accentCircle1Opacity
+          }}
+        ></div>
+        <div 
+          className="absolute bottom-0 left-0 w-56 h-56 rounded-full transform -translate-x-12 translate-y-12"
+          style={{
+            backgroundColor: colors.accentCircle2,
+            opacity: colors.accentCircle2Opacity
+          }}
+        ></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-section text-white mb-4">Contact</h2>
-          <p className="text-body text-blue-100 max-w-2xl mx-auto">
-            Ready to partner with us? Get in touch to discuss investment opportunities 
-            and how we can help accelerate your growth.
-          </p>
+          <EditableText
+            path="contact.title"
+            value={textContent.contact.title}
+            as="h2"
+            className="text-section text-white mb-4"
+          />
+          <EditableText
+            path="contact.description"
+            value={textContent.contact.description}
+            as="p"
+            className="text-body text-blue-100 max-w-2xl mx-auto"
+            multiline
+          />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -147,5 +184,14 @@ export function ContactSection() {
         </div>
       </div>
     </section>
+    
+    {showColorPicker && (
+      <ColorPicker
+        onClose={() => setShowColorPicker(false)}
+        onColorsChange={setColors}
+        initialColors={colors}
+      />
+    )}
+    </>
   );
 }

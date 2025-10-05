@@ -1,12 +1,44 @@
+import { Palette } from "lucide-react";
+import { useState } from "react";
+import { LightColorPicker } from "./LightColorPicker";
+import { useLightSectionColors } from "./SectionColorProvider";
+import { EditableText } from "./EditableText";
+import { useTextContent } from "./TextContentProvider";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import omniaLogo from "figma:asset/626d67c60cf0a38b4d655862987d1e2e4900526f.png";
+
 export function Header() {
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const { colors, setColors } = useLightSectionColors();
+  const { textContent } = useTextContent();
+  
   return (
-    <header className="bg-white border-b" style={{borderColor: 'var(--sage-medium)'}}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      <header className="relative z-20" style={{background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`, borderBottom: `1px solid ${colors.borderColor}`}}>
+        {/* Color Picker Button */}
+        <button
+          onClick={() => setShowColorPicker(true)}
+          className="absolute top-4 right-4 z-30 p-2 bg-black bg-opacity-10 hover:bg-opacity-20 rounded-full transition-all"
+          title="Edit Colors"
+        >
+          <Palette className="w-5 h-5 text-slate-600" />
+        </button>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
-            <h1 className="text-card-title" style={{color: 'var(--forest-deep)', letterSpacing: '0.1em'}}>
-              NEXUS CAPITAL
-            </h1>
+            {/* Large overlapping logo */}
+            <div className="relative z-25">
+              <ImageWithFallback
+                src={omniaLogo}
+                alt="Omnia Capital"
+                className="h-32 w-auto transform translate-y-10"
+                style={{
+                  filter: 'invert(1) brightness(0) drop-shadow(0 6px 12px rgba(0,0,0,0.2))',
+                  display: 'block'
+                }}
+              />
+            </div>
           </div>
           
           <nav className="hidden md:flex items-center space-x-12">
@@ -15,42 +47,60 @@ export function Header() {
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
-              Home
+              <EditableText
+                path="header.navigation.home"
+                value={textContent.header.navigation.home}
+              />
             </a>
             <a 
               href="#strategy" 
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
-              Strategy
+              <EditableText
+                path="header.navigation.strategy"
+                value={textContent.header.navigation.strategy}
+              />
             </a>
             <a 
               href="#team" 
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
-              Team
+              <EditableText
+                path="header.navigation.team"
+                value={textContent.header.navigation.team}
+              />
             </a>
             <a 
               href="#insights" 
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
-              Insights
+              <EditableText
+                path="header.navigation.insights"
+                value={textContent.header.navigation.insights}
+              />
             </a>
             <a 
               href="#results" 
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
-              Results
+              <EditableText
+                path="header.navigation.results"
+                value={textContent.header.navigation.results}
+              />
             </a>
             <a 
               href="#contact" 
               className="text-body transition-colors hover:opacity-80"
               style={{color: 'var(--forest-light)'}}
             >
-              Contact
+              <EditableText
+                path="header.navigation.contact"
+                value={textContent.header.navigation.contact}
+              />
             </a>
           </nav>
 
@@ -69,5 +119,14 @@ export function Header() {
         </div>
       </div>
     </header>
+    
+    {showColorPicker && (
+      <LightColorPicker
+        onClose={() => setShowColorPicker(false)}
+        onColorsChange={setColors}
+        initialColors={colors}
+      />
+    )}
+    </>
   );
 }
