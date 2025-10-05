@@ -43,7 +43,7 @@ export function MediaSection() {
         {/* Color Picker Button */}
         <button
           onClick={() => setShowColorPicker(true)}
-          className="absolute top-4 right-4 z-20 p-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all"
+          className="hidden absolute top-4 right-4 z-20 p-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all"
           title="Edit Colors"
         >
           <Palette className="w-5 h-5 text-white" />
