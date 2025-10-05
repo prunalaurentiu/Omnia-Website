@@ -11,7 +11,6 @@ export function ResultsSection() {
   const { textContent } = useTextContent();
   
   const investorPerformance = textContent.results.investorPerformance;
-  const keyAchievements = textContent.results.metrics;
 
   return (
     <>
@@ -60,43 +59,8 @@ export function ResultsSection() {
             />
           </div>
 
-          <div className="mt-16">
-            <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
-              <div className="text-center mb-8">
-                <h3 className="text-card-title text-slate-900 mb-2">Key Achievements</h3>
-                <p className="text-body text-slate-600">Operational excellence translated into measurable outcomes across the portfolio</p>
-              </div>
-              <div className="grid md:grid-cols-3 gap-8">
-                {keyAchievements.map((achievement, index) => (
-                  <div key={index} className="text-center group hover:scale-110 transition-all duration-200 cursor-pointer">
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
-                      <div className="text-metric group-hover:scale-105 transition-transform duration-200" style={{color: colors.primaryAccent}}>
-                        <EditableText
-                          path={`results.metrics.${index}.value`}
-                          value={achievement.value}
-                        />
-                      </div>
-                      <div className="text-body text-slate-700 font-semibold mb-1">
-                        <EditableText
-                          path={`results.metrics.${index}.label`}
-                          value={achievement.label}
-                        />
-                      </div>
-                      <div className="text-caption text-slate-500">
-                        <EditableText
-                          path={`results.metrics.${index}.description`}
-                          value={achievement.description}
-                          multiline
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
           {/* Portfolio Highlights */}
-          <div className="mt-20">
+          <div className="mt-16">
             <div className="bg-white rounded-xl p-8 shadow-lg border" style={{borderColor: colors.borderColor}}>
               <div className="text-center mb-8">
                 <h3 className="text-card-title text-slate-900 mb-2">Portfolio Highlights</h3>

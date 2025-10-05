@@ -103,11 +103,6 @@ export interface TextContent {
   results: {
     title: string;
     description: string;
-    metrics: {
-      label: string;
-      value: string;
-      description: string;
-    }[];
     investorPerformance: {
       metric: string;
       value: string;
@@ -323,28 +318,6 @@ const defaultTextContent: TextContent = {
   results: {
     title: "Track Record",
     description: "By combining sector-specific expertise, commercial acceleration and operational excellence, Omnia Prime delivers top-quartile returns while supporting Romania’s industrial and digital transformation.",
-    metrics: [
-      {
-        label: "Value creation & impact",
-        value: "Top-quartile returns",
-        description: "Hands-on partnership unlocks sustainable competitive advantages across traditional industries."
-      },
-      {
-        label: "Measured results",
-        value: "EBITDA 2x at Dumagas",
-        description: "Turnaround doubled EBITDA from €1.9M to €3.8M, lifted net profit to ~€2M and reduced debt by ~30%."
-      },
-      {
-        label: "Job creation",
-        value: "250+ roles",
-        description: "Portfolio companies have created over 250 new jobs, 95% of which are held by Romanian citizens."
-      },
-      {
-        label: "Investment analytics",
-        value: "Scanned more than 500 companies",
-        description: "Taking the time to make the best decision for our investors’ capital."
-      }
-    ],
     investorPerformance: [
       {
         metric: "Net IRR",
