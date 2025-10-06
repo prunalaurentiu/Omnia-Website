@@ -1,4 +1,3 @@
-import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { EditableText } from "./EditableText";
 import { useTextContent } from "./TextContentProvider";
@@ -64,20 +63,11 @@ export function InsightsSection() {
                   multiline
                 />
 
-                <div className="mt-auto flex items-center justify-between text-caption text-slate-500">
-                  <div className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    <EditableText
-                      path={`insights.articles.${index}.date`}
-                      value={insight.date}
-                    />
-                  </div>
-                  <div>
-                    <EditableText
-                      path={`insights.articles.${index}.readTime`}
-                      value={insight.readTime}
-                    />
-                  </div>
+                <div className="mt-auto flex items-center justify-end text-caption text-slate-500">
+                  <EditableText
+                    path={`insights.articles.${index}.readTime`}
+                    value={insight.readTime}
+                  />
                 </div>
               </article>
             </Link>

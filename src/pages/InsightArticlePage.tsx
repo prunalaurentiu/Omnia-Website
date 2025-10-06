@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { EditableText } from "../components/EditableText";
@@ -6,6 +7,10 @@ import { useTextContent } from "../components/TextContentProvider";
 export function InsightArticlePage() {
   const { slug } = useParams<{ slug: string }>();
   const { textContent } = useTextContent();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [slug]);
 
   const articleIndex = textContent.insights.articles.findIndex(
     (article) => article.slug === slug
@@ -19,7 +24,7 @@ export function InsightArticlePage() {
             The requested insight could not be found.
           </p>
           <Link
-            to="/"
+            to={{ pathname: "/", hash: "#insights" }}
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -36,7 +41,7 @@ export function InsightArticlePage() {
     <article className="py-20 bg-slate-50">
       <div className="max-w-3xl mx-auto px-4">
         <Link
-          to="/"
+          to={{ pathname: "/", hash: "#insights" }}
           className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium mb-8"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />

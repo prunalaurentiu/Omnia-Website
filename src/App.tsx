@@ -1,4 +1,5 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
 import { TeamSection } from "./components/TeamSection";
@@ -14,6 +15,20 @@ import { TextEditingToolbar } from "./components/TextEditingToolbar";
 import { InsightArticlePage } from "./pages/InsightArticlePage";
 
 function Layout() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+    }
+
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [location.pathname, location.hash]);
+
   return (
     <div className="min-h-screen bg-white">
       <TextEditingToolbar />

@@ -143,20 +143,13 @@ export interface TextContent {
   footer: {
     brandName: string;
     description: string;
-    sections: {
-      company: {
+    sections: Record<
+      string,
+      {
         title: string;
-        links: { label: string; href: string; }[];
-      };
-      investors: {
-        title: string;
-        links: { label: string; href: string; }[];
-      };
-      legal: {
-        title: string;
-        links: { label: string; href: string; }[];
-      };
-    };
+        links: { label: string; href: string }[];
+      }
+    >;
     copyright: string;
   };
 }
@@ -312,77 +305,77 @@ const defaultTextContent: TextContent = {
       {
         title: "123Credit crește de cinci ori într-un an",
         publication: "HotNews.ro",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "HotNews.ro prezintă modul în care marketplace-ul 123Credit, susținut de Omnia Capital, a devenit liderul digital al creditării din România după o creștere accelerată.",
         url: "https://hotnews.ro/123credit-creste-de-5-ori-intr-un-an-noul-lider-digital-al-creditarii-din-romania-2070591?utm"
       },
       {
         title: "Dumagas, companie din portofoliul Omnia Capital, intră pe segmentul auto",
         publication: "Ziarul Financiar",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Ziarul Financiar relatează extinderea transportatorului Dumagas, preluat de Omnia Capital, către noi linii de business din zona auto.",
         url: "https://www.zf.ro/auto/dumagas-preluata-in-urma-cu-doi-ani-de-omnia-capital-a-intrat-pe-22769406?utm"
       },
       {
         title: "Matei Ladea explică cum companiile românești pot accelera investițiile",
         publication: "Ziarul Financiar",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Cofondatorul Omnia Capital, Matei Ladea, discută despre soluțiile prin care antreprenorii locali pot finanța planuri ambițioase de creștere.",
         url: "https://www.zf.ro/companii/matei-ladea-omnia-capital-companiile-romanesti-pot-acum-investi-in-22779046?utm"
       },
       {
         title: "Omnia Capital investește în platforma Cargo Buddy",
         publication: "Profit.ro",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Profit.ro anunță preluarea unei participații la Cargo Buddy de către Omnia Capital pentru a accelera digitalizarea transporturilor.",
         url: "https://www.profit.ro/povesti-cu-profit/auto-transporturi/tranzactie-omnia-capital-preia-o-parte-din-actiunile-cargo-buddy-platforma-lansata-de-mihai-nastase-21654638?utm"
       },
       {
         title: "Dumagas, controlat de Omnia Capital, pariază pe extindere",
         publication: "Ziarul Financiar",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Ziarul Financiar urmărește planurile de creștere ale transportatorului Dumagas după integrarea în portofoliul Omnia Capital.",
         url: "https://www.zf.ro/companii/transportatorul-local-dumagas-controlat-omnia-capital-pariaza-22167552?utm"
       },
       {
         title: "ZF Live: Matei Ladea despre strategia Omnia Capital",
         publication: "Ziarul Financiar",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Matei Ladea, cofondator Omnia Capital, explică la ZF Live modul în care fondul urmărește companii românești cu potențial regional.",
         url: "https://www.zf.ro/companii/zf-live-matei-ladea-cofondator-omnia-capital-ne-uitat-900-companii-21779125?utm"
       },
       {
         title: "Omnia Capital preia Dumagas de la Bancroft",
         publication: "CEE Legal Matters",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "CEE Legal Matters analizează achiziția Dumagas de către Omnia Capital și implicarea echipei juridice în tranzacție.",
         url: "https://ceelegalmatters.com/deal-5/22871-deal-5-omnia-chief-evangelist-matei-ladea-on-dumagas-acquisition-from-bancroft?utm"
       },
       {
         title: "15 minute cu un antreprenor: Matei Ladea",
         publication: "Ziarul Financiar",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Interviul ZF 15 minute cu Matei Ladea explorează parcursul Omnia Capital și filosofia de parteneriat cu fondatorii.",
         url: "https://www.zf.ro/zf-15-minute-cu-un-antreprenor/zf-15-minute-cu-un-antreprenor-matei-ladea-cofondator-al-omnia-20778656?utm"
       },
       {
         title: "123credit.ro ridică 3 milioane de euro cu sprijinul Omnia Capital",
         publication: "Profit.ro",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Profit.ro detaliază runda de finanțare prin care Omnia Capital susține extinderea platformei 123credit.ro.",
         url: "https://www.profit.ro/povesti-cu-profit/startup-ul-123credit-ro-a-obtinut-o-finantare-de-3-milioane-de-euro-prin-intermediul-omnia-capital-in-a-doua-runda-de-finantare-20851209?utm"
       },
       {
         title: "Omnia Capital finalizează preluarea Dumagas",
         publication: "Romania Insider",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Romania Insider anunță finalizarea tranzacției prin care Omnia Capital a preluat transportatorul Dumagas.",
         url: "https://www.romania-insider.com/omnia-capital-dumagas-takeover-2023?utm"
       },
       {
         title: "Fondatorii Omnia Capital discută achiziția Dumagas",
         publication: "ZF Investiți în România",
-        date: "Accessed 2024",
+        date: "",
         excerpt: "Emisiunea ZF Investiți în România prezintă planurile fondatorilor Omnia Capital după achiziția transportatorului Dumagas.",
         url: "https://www.zf.ro/zf-investiti-in-romania/zf-investiti-in-romania-fondatorii-companiei-care-a-preluat-dumagas-22344218?utm"
       }
@@ -455,35 +448,7 @@ const defaultTextContent: TextContent = {
   footer: {
     brandName: "OMNIA PRIME",
     description: "Dedicated growth-equity partner supporting Eastern Europe with institutional capital and hands-on execution.",
-    sections: {
-      company: {
-        title: "Company",
-        links: [
-          { label: "About Us", href: "#about" },
-          { label: "Portfolio", href: "#portfolio" },
-          { label: "Team", href: "#team" },
-          { label: "Careers", href: "#careers" }
-        ]
-      },
-      investors: {
-        title: "Investors",
-        links: [
-          { label: "Fund Documents", href: "#documents" },
-          { label: "Reports", href: "#reports" },
-          { label: "Portal Login", href: "#login" },
-          { label: "Contact IR", href: "#ir" }
-        ]
-      },
-      legal: {
-        title: "Legal",
-        links: [
-          { label: "Privacy Policy", href: "#privacy" },
-          { label: "Terms of Service", href: "#terms" },
-          { label: "Compliance", href: "#compliance" },
-          { label: "Disclosures", href: "#disclosures" }
-        ]
-      }
-    },
+    sections: {},
     copyright: "© 2024 Omnia Prime. All rights reserved."
   }
 };

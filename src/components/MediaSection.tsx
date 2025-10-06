@@ -27,7 +27,7 @@ export function MediaSection() {
   }, [coverage, itemsPerView, startIndex]);
 
   const handleShowMore = () => {
-    if (coverage.length <= itemsPerView) return;
+    if (isEditing || coverage.length <= itemsPerView) return;
     setStartIndex((prev) => (prev + itemsPerView) % coverage.length);
   };
 
@@ -69,21 +69,21 @@ export function MediaSection() {
               path="media.title"
               value={textContent.media.title}
               as="h2"
-              className="text-section text-slate-900 mb-4"
+              className="text-section text-white mb-4"
             />
             <EditableText
               path="media.description"
               value={textContent.media.description}
               as="p"
-              className="text-body text-slate-600 max-w-3xl mx-auto"
+              className="text-body text-slate-300 max-w-3xl mx-auto"
               multiline
             />
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {visibleCoverage.map(({ item, index }) => (
+            {visibleCoverage.map(({ item, index: coverageIndex }) => (
               <a
-                key={item.url ?? index}
+                key={item.url ?? coverageIndex}
                 href={item.url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -96,29 +96,25 @@ export function MediaSection() {
               >
                 <article className="bg-slate-50 rounded-lg p-8 border border-slate-200 transition-shadow group-hover:shadow-lg h-full min-h-[360px] flex flex-col">
                   <EditableText
-                    path={`media.coverage.${index}.publication`}
+                    path={`media.coverage.${coverageIndex}.publication`}
                     value={item.publication}
                     className="text-caption mb-3 uppercase tracking-wide"
                     style={{ color: "var(--blue-corporate)" }}
                   />
                   <EditableText
-                    path={`media.coverage.${index}.title`}
+                    path={`media.coverage.${coverageIndex}.title`}
                     value={item.title}
                     as="h3"
                     className="text-card-title text-slate-900 mb-3"
                   />
                   <EditableText
-                    path={`media.coverage.${index}.excerpt`}
+                    path={`media.coverage.${coverageIndex}.excerpt`}
                     value={item.excerpt}
                     as="p"
                     className="text-body text-slate-600 mb-6 flex-1"
                     multiline
                   />
-                  <div className="mt-auto flex items-center justify-between text-caption text-slate-500">
-                    <EditableText
-                      path={`media.coverage.${index}.date`}
-                      value={item.date}
-                    />
+                  <div className="mt-auto flex items-center justify-end text-caption text-slate-500">
                     <span className="inline-flex items-center text-blue-600 group-hover:text-blue-700">
                       Read article
                     </span>
@@ -133,7 +129,8 @@ export function MediaSection() {
               <button
                 type="button"
                 onClick={handleShowMore}
-                className="px-6 py-3 text-sm font-semibold rounded-full bg-slate-900 text-white shadow-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                className="px-6 py-3 rounded-md text-white hover:opacity-90 hover:scale-105 transition-all duration-200"
+                style={{ backgroundColor: "var(--blue-corporate)" }}
               >
                 Click here to see more
               </button>
@@ -141,9 +138,12 @@ export function MediaSection() {
           )}
 
           <div className="text-center mt-12">
-            <div className="inline-flex items-center space-x-4 text-sm text-slate-500">
+            <div className="inline-flex items-center space-x-4 text-body text-slate-300">
               <span>Press inquiries:</span>
-              <a href="mailto:invest@omnia.capital" className="text-slate-900 hover:opacity-80 underline">
+              <a
+                href="mailto:invest@omnia.capital"
+                className="underline text-slate-300 hover:text-white"
+              >
                 invest@omnia.capital
               </a>
             </div>
@@ -151,15 +151,15 @@ export function MediaSection() {
         </div>
       </section>
     
-    {showColorPicker && (
-      <ColorPicker
-        sectionId="media"
-        sectionName="Media"
-        onClose={() => setShowColorPicker(false)}
-        onColorsChange={setColors}
-        initialColors={colors}
-      />
-    )}
+      {showColorPicker && (
+        <ColorPicker
+          sectionId="media"
+          sectionName="Media"
+          onClose={() => setShowColorPicker(false)}
+          onColorsChange={setColors}
+          initialColors={colors}
+        />
+      )}
     </>
   );
 }
