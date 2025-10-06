@@ -79,11 +79,13 @@ export interface TextContent {
     title: string;
     description: string;
     articles: {
+      slug: string;
       title: string;
       excerpt: string;
       date: string;
       readTime: string;
       category: string;
+      content: string;
     }[];
   };
   
@@ -278,25 +280,43 @@ const defaultTextContent: TextContent = {
     description: "Stay informed with our latest market analysis, industry insights, and thought leadership on technology investment trends.",
     articles: [
       {
+        slug: "future-of-b2b-saas",
         title: "The Future of B2B SaaS: Trends Shaping 2024",
         excerpt: "Exploring the key trends that will define the B2B software landscape, from AI integration to evolving customer expectations.",
         date: "March 15, 2024",
         readTime: "5 min read",
-        category: "Market Analysis"
+        category: "Market Analysis",
+        content: `B2B SaaS continues to outpace broader software growth, but the definition of a best-in-class platform is shifting. Customers now expect modular products that integrate natively with existing workflows, along with transparent pricing models that scale with the value delivered.
+
+Artificial intelligence has moved from experimentation to expectation. Winning platforms are embedding AI copilots that augment human decision-making, automate routine processes, and surface predictive insights. At the same time, go-to-market teams are using product-led strategies to shorten sales cycles and reduce acquisition costs.
+
+For operators, the priority is building resilient revenue engines. That means investing in data infrastructure, usage analytics, and customer success motions that deliver measurable outcomes. As budgets tighten, SaaS companies that can prove time-to-value and align pricing with realized savings will capture the lion's share of growth in 2024 and beyond.`
       },
       {
+        slug: "operational-excellence-high-growth-startups",
         title: "Operational Excellence in High-Growth Startups",
         excerpt: "How portfolio companies can maintain operational efficiency while scaling rapidly in competitive markets.",
-        date: "March 8, 2024", 
+        date: "March 8, 2024",
         readTime: "7 min read",
-        category: "Operations"
+        category: "Operations",
+        content: `Growth without guardrails can quickly erode enterprise value. High-performing startups establish operating cadences that create visibility across product, sales, finance, and people functions. Weekly KPI reviews, quarterly planning rituals, and real-time dashboards keep teams aligned on the metrics that matter.
+
+Leaders should invest early in middle management and empower operators closest to the work to make informed decisions. Standardizing processes—from onboarding to incident response—ensures new hires are productive faster and that institutional knowledge is preserved as the team scales.
+
+Finally, disciplined resource allocation is the hallmark of operational excellence. Scenario-based budgeting, zero-based planning, and post-investment reviews help leadership teams redeploy capital toward the initiatives with the highest strategic and financial return.`
       },
       {
+        slug: "esg-integration-private-equity",
         title: "ESG Integration in Private Equity",
         excerpt: "Best practices for incorporating environmental, social, and governance factors into investment decisions.",
         date: "February 28, 2024",
         readTime: "6 min read",
-        category: "ESG"
+        category: "ESG",
+        content: `Institutional investors increasingly expect private equity managers to articulate how environmental, social, and governance factors inform investment selection and value creation plans. Rather than a compliance exercise, leading firms embed ESG metrics into their underwriting models and track progress alongside financial KPIs.
+
+During diligence, investors should evaluate supply-chain resilience, data privacy practices, workforce engagement, and exposure to regulatory change. Post-close, portfolio companies benefit from clear 100-day plans that assign responsibility for ESG initiatives and establish measurement frameworks.
+
+Transparent reporting closes the loop. Quarterly board materials that highlight emissions intensity, diversity metrics, and governance milestones help management teams course-correct quickly while giving LPs confidence that ESG commitments are delivering tangible results.`
       }
     ]
   },
