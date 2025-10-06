@@ -1,10 +1,10 @@
-import { Calendar, ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 import { EditableText } from "./EditableText";
 import { useTextContent } from "./TextContentProvider";
 
 export function InsightsSection() {
-  const { textContent } = useTextContent();
+  const { textContent, isEditing } = useTextContent();
   const insights = textContent.insights.articles;
 
   return (
@@ -33,51 +33,55 @@ export function InsightsSection() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {insights.map((insight, index) => (
-            <article key={index} className="bg-slate-50 rounded-lg p-8 hover:shadow-lg transition-shadow cursor-pointer border border-slate-200">
-              <EditableText
-                path={`insights.articles.${index}.category`}
-                value={insight.category}
-                className="text-caption mb-3 uppercase tracking-wide"
-                style={{color: 'var(--blue-corporate)'}}
-              />
-              <EditableText
-                path={`insights.articles.${index}.title`}
-                value={insight.title}
-                as="h3"
-                className="text-card-title text-slate-900 mb-3"
-              />
-              <EditableText
-                path={`insights.articles.${index}.excerpt`}
-                value={insight.excerpt}
-                as="p"
-                className="text-body text-slate-600 mb-6"
-                multiline
-              />
-              
-              <div className="flex items-center justify-between text-caption text-slate-500">
-                <div className="flex items-center">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <EditableText
-                    path={`insights.articles.${index}.date`}
-                    value={insight.date}
-                  />
-                </div>
-                <div>
-                  <EditableText
-                    path={`insights.articles.${index}.readTime`}
-                    value={insight.readTime}
-                  />
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+            <Link
+              key={insight.slug}
+              to={`/insights/${insight.slug}`}
+              onClick={(event) => {
+                if (isEditing) {
+                  event.preventDefault();
+                }
+              }}
+              className="group block h-full"
+            >
+              <article className="bg-slate-50 rounded-lg p-8 border border-slate-200 transition-shadow group-hover:shadow-lg h-full min-h-[360px] flex flex-col">
+                <EditableText
+                  path={`insights.articles.${index}.category`}
+                  value={insight.category}
+                  className="text-caption mb-3 uppercase tracking-wide"
+                  style={{ color: "var(--blue-corporate)" }}
+                />
+                <EditableText
+                  path={`insights.articles.${index}.title`}
+                  value={insight.title}
+                  as="h3"
+                  className="text-card-title text-slate-900 mb-3"
+                />
+                <EditableText
+                  path={`insights.articles.${index}.excerpt`}
+                  value={insight.excerpt}
+                  as="p"
+                  className="text-body text-slate-600 mb-6 flex-1"
+                  multiline
+                />
 
-        <div className="text-center mt-12">
-          <Button variant="outline">
-            View All Insights
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
+                <div className="mt-auto flex items-center justify-between text-caption text-slate-500">
+                  <div className="flex items-center">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    <EditableText
+                      path={`insights.articles.${index}.date`}
+                      value={insight.date}
+                    />
+                  </div>
+                  <div>
+                    <EditableText
+                      path={`insights.articles.${index}.readTime`}
+                      value={insight.readTime}
+                    />
+                  </div>
+                </div>
+              </article>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

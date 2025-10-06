@@ -1,5 +1,5 @@
-import { ExternalLink, Award, FileText, Palette } from "lucide-react";
-import { useState } from "react";
+import { Palette } from "lucide-react";
+import { useMemo, useState } from "react";
 import { ColorPicker } from "./ColorPicker";
 import { useSectionColors } from "./SectionColorProvider";
 import { EditableText } from "./EditableText";
@@ -7,39 +7,38 @@ import { useTextContent } from "./TextContentProvider";
 
 export function MediaSection() {
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const { colors, setColors } = useSectionColors('media', true);
-  const { textContent } = useTextContent();
-  
-  const mediaItems = [
-    {
-      type: "Press Release",
-      title: textContent.media.coverage[0].title,
-      source: textContent.media.coverage[0].publication,
-      date: textContent.media.coverage[0].date,
-      excerpt: textContent.media.coverage[0].excerpt,
-      icon: FileText
-    },
-    {
-      type: "Award",
-      title: textContent.media.coverage[1].title,
-      source: textContent.media.coverage[1].publication,
-      date: textContent.media.coverage[1].date,
-      excerpt: textContent.media.coverage[1].excerpt,
-      icon: Award
-    },
-    {
-      type: "Interview",
-      title: textContent.media.coverage[2].title,
-      source: textContent.media.coverage[2].publication,
-      date: textContent.media.coverage[2].date,
-      excerpt: textContent.media.coverage[2].excerpt,
-      icon: ExternalLink
+  const { colors, setColors } = useSectionColors("media", true);
+  const { textContent, isEditing } = useTextContent();
+  const coverage = textContent.media.coverage;
+  const itemsPerView = 3;
+  const [startIndex, setStartIndex] = useState(0);
+
+  const visibleCoverage = useMemo(() => {
+    if (coverage.length <= itemsPerView) {
+      return coverage.map((item, index) => ({ item, index }));
     }
-  ];
+
+    const items = [] as { item: (typeof coverage)[number]; index: number }[];
+    for (let offset = 0; offset < itemsPerView; offset += 1) {
+      const index = (startIndex + offset) % coverage.length;
+      items.push({ item: coverage[index], index });
+    }
+    return items;
+  }, [coverage, itemsPerView, startIndex]);
+
+  const handleShowMore = () => {
+    if (coverage.length <= itemsPerView) return;
+    setStartIndex((prev) => (prev + itemsPerView) % coverage.length);
+  };
 
   return (
     <>
-      <section className="py-20 text-white relative overflow-hidden" style={{background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`}}>
+      <section
+        className="py-20 bg-gradient-to-br from-slate-50 to-slate-100 relative overflow-hidden"
+        style={{
+          background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`
+        }}
+      >
         {/* Color Picker Button */}
         <button
           onClick={() => setShowColorPicker(true)}
@@ -64,74 +63,93 @@ export function MediaSection() {
             opacity: colors.accentCircle2Opacity
           }}
         ></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <EditableText
-            path="media.title"
-            value={textContent.media.title}
-            as="h2"
-            className="text-section text-white mb-4"
-          />
-          <EditableText
-            path="media.description"
-            value={textContent.media.description}
-            as="p"
-            className="text-body text-blue-100 max-w-2xl mx-auto"
-            multiline
-          />
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <EditableText
+              path="media.title"
+              value={textContent.media.title}
+              as="h2"
+              className="text-section text-slate-900 mb-4"
+            />
+            <EditableText
+              path="media.description"
+              value={textContent.media.description}
+              as="p"
+              className="text-body text-slate-600 max-w-3xl mx-auto"
+              multiline
+            />
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {mediaItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{backgroundColor: 'var(--sky-cool)'}}>
-                    <Icon className="w-6 h-6" style={{color: 'var(--blue-corporate)'}} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-caption mb-2 uppercase tracking-wide" style={{color: 'var(--blue-corporate)'}}>{item.type}</div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {visibleCoverage.map(({ item, index }) => (
+              <a
+                key={item.url ?? index}
+                href={item.url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(event) => {
+                  if (isEditing || !item.url) {
+                    event.preventDefault();
+                  }
+                }}
+                className="group block h-full"
+              >
+                <article className="bg-slate-50 rounded-lg p-8 border border-slate-200 transition-shadow group-hover:shadow-lg h-full min-h-[360px] flex flex-col">
+                  <EditableText
+                    path={`media.coverage.${index}.publication`}
+                    value={item.publication}
+                    className="text-caption mb-3 uppercase tracking-wide"
+                    style={{ color: "var(--blue-corporate)" }}
+                  />
+                  <EditableText
+                    path={`media.coverage.${index}.title`}
+                    value={item.title}
+                    as="h3"
+                    className="text-card-title text-slate-900 mb-3"
+                  />
+                  <EditableText
+                    path={`media.coverage.${index}.excerpt`}
+                    value={item.excerpt}
+                    as="p"
+                    className="text-body text-slate-600 mb-6 flex-1"
+                    multiline
+                  />
+                  <div className="mt-auto flex items-center justify-between text-caption text-slate-500">
                     <EditableText
-                      path={`media.coverage.${index}.title`}
-                      value={item.title}
-                      as="h3"
-                      className="text-card-title text-slate-900 mb-3"
+                      path={`media.coverage.${index}.date`}
+                      value={item.date}
                     />
-                    <EditableText
-                      path={`media.coverage.${index}.excerpt`}
-                      value={item.excerpt}
-                      as="p"
-                      className="text-body text-slate-600 mb-3"
-                      multiline
-                    />
-                    <div className="flex items-center justify-between text-caption text-slate-500">
-                      <EditableText
-                        path={`media.coverage.${index}.publication`}
-                        value={item.source}
-                      />
-                      <EditableText
-                        path={`media.coverage.${index}.date`}
-                        value={item.date}
-                      />
-                    </div>
+                    <span className="inline-flex items-center text-blue-600 group-hover:text-blue-700">
+                      Read article
+                    </span>
                   </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                </article>
+              </a>
+            ))}
+          </div>
 
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center space-x-4 text-sm text-blue-100">
-            <span>Press inquiries:</span>
-            <a href="mailto:invest@omnia.capital" className="text-white hover:opacity-80 underline">
-              invest@omnia.capital
-            </a>
+          {coverage.length > itemsPerView && (
+            <div className="mt-12 flex justify-center">
+              <button
+                type="button"
+                onClick={handleShowMore}
+                className="px-6 py-3 text-sm font-semibold rounded-full bg-slate-900 text-white shadow-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+              >
+                Click here to see more
+              </button>
+            </div>
+          )}
+
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center space-x-4 text-sm text-slate-500">
+              <span>Press inquiries:</span>
+              <a href="mailto:invest@omnia.capital" className="text-slate-900 hover:opacity-80 underline">
+                invest@omnia.capital
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     
     {showColorPicker && (
       <ColorPicker
