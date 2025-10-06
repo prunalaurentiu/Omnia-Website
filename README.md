@@ -9,11 +9,6 @@
 
 Run `npm run dev` to start the development server.
 
-## Deployment branch
-
-All production deploys track the `Omnia-latest` branch. When opening a pull
-request, set its base to `Omnia-latest` (or re-target the PR before merging)
-so the changes ship to the live site.
 
 ## Managing insight articles
 
