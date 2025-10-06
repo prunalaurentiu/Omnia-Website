@@ -79,8 +79,10 @@ export interface TextContent {
     title: string;
     description: string;
     articles: {
+      slug: string;
       title: string;
       excerpt: string;
+      content: string;
       date: string;
       readTime: string;
       category: string;
@@ -96,6 +98,7 @@ export interface TextContent {
       publication: string;
       date: string;
       excerpt: string;
+      url: string;
     }[];
   };
   
@@ -267,25 +270,37 @@ const defaultTextContent: TextContent = {
     description: "Stay informed with our latest market analysis, industry insights, and thought leadership on technology investment trends.",
     articles: [
       {
-        title: "The Future of B2B SaaS: Trends Shaping 2024",
-        excerpt: "Exploring the key trends that will define the B2B software landscape, from AI integration to evolving customer expectations.",
-        date: "March 15, 2024",
-        readTime: "5 min read",
-        category: "Market Analysis"
+        slug: "eastern-europe-hidden-bottleneck",
+        title: "Eastern Europe's Hidden Bottleneck: When Strong Products Meet Weak Sales",
+        excerpt:
+          "Across Central and Eastern Europe, founder-led companies with world-class products plateau because commercial systems never caught up. We explore the historical roots and the operating fixes that unlock disciplined growth.",
+        content:
+          "Across Central and Eastern Europe, a quiet paradox plays out in boardrooms every day. Companies that build excellent products and deliver reliable services find themselves inexplicably stuck—not because they can't compete on quality, but because they never learned to sell. The roots run deep. For half a century under planned economies, demand was allocated rather than won. Factories focused on production targets, not customer conversations. Sales wasn't a profession; it was a distribution function.\n\nThat legacy has left scars that still shape how businesses operate today. Walk into a typical mid-sized firm in Warsaw, Bucharest, or Sofia, and you'll often find the same pattern: the founder is still the chief salesperson. Pipeline visibility lives in spreadsheets that only one person understands. Forecasts swing wildly. Big deals close—or don't—based on personal relationships rather than process. Pricing remains stubbornly cost-plus. Sales teams discount reflexively rather than defending value. Deal terms vary wildly from customer to customer, quietly eroding margins through unmanaged concessions. When procurement departments across Western Europe send out tenders, the instinct is to chase volume by undercutting competitors, not to walk away or reframe the conversation.\n\nThe commercial infrastructure that Western peers take for granted is often missing or underused. CRM systems exist but aren't trusted or properly configured. There's little revenue operations expertise, weak attribution, almost no systematic win-loss analysis. Customer success—the discipline of ensuring clients actually realize value after the contract is signed—barely registers as a category. Churn quietly offsets new business, masking weak net retention that never makes it into board discussions. Meanwhile, the brand side remains thin. Strong engineering rarely translates into compelling narratives. Case studies, third-party certifications, and category leadership signals that would reassure Western buyers are scarce. Export ambitions run into friction: language barriers, regulatory complexity, labeling standards, VAT and GDPR compliance, and the challenge of selecting and managing distributors in unfamiliar markets.\n\nThe talent picture compounds the problem. Formal sales training is rare. Compensation structures often cap commissions, limiting upside motivation. Language skills—particularly business-level English or German—remain patchy, restricting which markets teams can credibly address. Banks haven't helped. Conservative lending cultures favor tangible assets over brand equity, pushing marketing and commercial investment down the priority list. The result is a working-capital trap: long payment cycles strain cash flow, which further delays investment in the very capabilities that could accelerate growth. This isn't about effort or intelligence. It's about systems that were never built. While post-transition companies perfected operations and manufacturing, sales and marketing were treated as support functions, not core disciplines. The cultural and institutional memory of how to build markets—rather than just fulfill demand—simply isn't there.\n\nThe cost is measured in stalled trajectories. Growth plateaus despite product strength. Pricing power erodes. Customer acquisition becomes more expensive, sales cycles stretch longer, and revenue concentrates dangerously in a handful of accounts. When exit conversations begin, technical excellence isn't enough to overcome weak commercial foundations—and valuations suffer accordingly. Yet the opportunity is equally clear. The region's next productivity leap won't come from making better things—it already does that well. It will come from building better markets for what it makes: structured pricing that captures value, disciplined pipelines that forecast reliably, credible brands that command premium positioning, export-ready operations that scale across borders, and customer success models that turn one-time buyers into compounding relationships.\n\nThis isn't a product problem. It's a commercial system problem. And unlike product development, commercial systems can be installed, learned, and scaled—if leaders recognize what's missing and commit to building it.",
+        date: "April 5, 2024",
+        readTime: "9 min read",
+        category: "Commercial Strategy"
       },
       {
-        title: "Operational Excellence in High-Growth Startups",
-        excerpt: "How portfolio companies can maintain operational efficiency while scaling rapidly in competitive markets.",
-        date: "March 8, 2024", 
+        slug: "building-value-through-sustainable-ownership",
+        title: "Building Value Through Sustainable Ownership",
+        excerpt:
+          "Governance, people, and environmental discipline are no longer compliance checkboxes—they're the operating system of superior exits. Omnia's sustainable ownership model shows how ESG compounds value in practice.",
+        content:
+          "In private equity, ownership isn't just about control—it's where value actually compounds. And increasingly, the businesses that command the best exits are those that treated governance, people, and environmental responsibility as strategic priorities rather than compliance checkboxes. Start with governance. Clean board discipline, independent advisors who challenge assumptions, a business intelligence manager reporting directly to the board, tight financial controls, and proper minority-shareholder protections—these aren't luxuries. They sharpen decision-making, reduce the risk of fraud or opacity, and make a company credible to institutional buyers. When exit conversations begin, governance gaps shrink the buyer universe and invite discounts. Strong governance does the opposite.\n\nThen there's the social side—how a company actually treats its people. Inclusive leadership that draws from the full talent pool. Health benefits that go beyond the statutory minimum. Salaries that are indexed above inflation so people aren't constantly job-hunting. Profit-sharing that aligns incentives. Real investment in safety and training. These aren't just ethical choices; they're economic ones. Retention improves, productivity rises, and the company earns the community license to operate that regulators and customers increasingly expect.\n\nOmnia Capital treats ESG—environmental, social, and governance factors—not as a reporting burden but as a primary value-creation lever. That view reflects market reality: Western strategics and private equity buyers now systematically price ESG into their bids. Companies with clean governance, low environmental risk, and strong employee metrics move through due diligence faster and command premium valuations. Those without get discounted or filtered out entirely.\n\nAlthough an SFDR Article 6 investment firm, Omnia sets a practical floor: comply with European sustainability disclosure rules at minimum, but aim higher wherever it creates value. ESG isn't bolted on after a deal closes—it's hard-wired into screening, investment committee papers, and shareholder agreements from day one. Exclusion lists, \"do no significant harm\" checks aligned with EU Taxonomy standards, and diligence protocols borrowed from institutional LPs surface both risks and clear upgrade paths. Deals move forward only when there's a credible plan to address what's broken.\n\nOn the environmental side, the focus is operational: efficiency improvements that cut costs and reduce regulatory exposure. At Dumagas, a portfolio logistics company, average fuel consumption and CO₂ emissions per vehicle dropped by more than a third through fleet upgrades and route optimization. Certifications—EcoVadis, Green Carrier, ISO 50001—reinforced credibility with customers and regulators. Simple process fixes, like automated invoicing that eliminated unnecessary trips, compounded the gains.\n\nThroughout, Omnia tracks ESG KPIs—carbon intensity, employee turnover, diversity metrics, safety incidents—alongside financial performance. That transparency speeds diligence when exit time arrives, de-risks the process, and often unlocks premium pricing, especially with Western buyers applying their own ESG screens. The approach is pragmatic, not ideological. Omnia doesn't claim an Article 9 \"sustainable investment\" label, but it does operate ESG-forward in practice, ensuring that none of its investments undermine EU climate and social objectives. Negatives are either avoided or actively mitigated.\n\nBehind this stance is Matei Ladea's conviction, shaped by formal training in sustainable investing and the UN Sustainable Development Goals: ESG isn't a separate workstream—it's the operating system of modern value creation. Integrating culture, governance, and environmental realism doesn't just produce better exits. It builds more resilient companies and delivers superior outcomes for investors, employees, and society alike.",
+        date: "April 12, 2024",
+        readTime: "8 min read",
+        category: "Sustainable Ownership"
+      },
+      {
+        slug: "why-romania-why-now",
+        title: "Why Romania—and Why Now",
+        excerpt:
+          "Romania pairs accelerating institutional capital with founder-led succession needs. We outline the market thesis powering Omnia's Fix → Build → Scale playbook and why the timing is right for disciplined operators.",
+        content:
+          "Romania is the most compelling private-equity market in Eastern Europe because it combines real economic momentum with structural underpenetration of professional capital. After a soft 2023, fundraising rebounded sharply in 2024—catalyzed by the EIF-managed Recovery Equity Fund and local family offices—signaling both liquidity and policy support. Yet penetration remains thin relative to GDP, which keeps pricing attractive and the runway for professional investors long. The pipes are opening, the pool is still shallow, and the upside is disproportionate.\n\nThe market offers repeatable themes: fragmented mid-market leaders in consumer services, healthcare, logistics, and tech-enabled B2B; owner-operator succession; and businesses that can export process discipline and digitalization to win regionally. Deal flow is robust—consumer and services led 2024 activity—and exits, though still concentrated, doubled in value, proving realizations are feasible even without active IPO windows.\n\nWe anchor our conviction in impact that shows up in financials and headcount, not press releases. From 2019 to 2023, PE-backed firms in Romania added tens of thousands of jobs and delivered positive five-year EBITDA growth despite a volatile 2023 energy cycle. That's evidence operational value creation travels well through macro noise. That's the canvas we paint on.\n\nOmnia Capital's approach converts this structural arbitrage into compounding cash flows through an operator's lens: Fix → Build → Scale.\n\nFix: management, governance, cash flow, commercial discipline, investment rationalization, warranty and claims control, and a CFO upgrade with IFRS-ready reporting.\n\nBuild: commercial engines—account-based sales, yield management—digitalization through telematics, ERP and BI systems, workflow automation, and professional organization design with KPI-linked incentives.\n\nScale: buy-and-build in fragmented niches, cross-border roll-outs into DACH, Benelux, and CEE, and structured co-investments to accelerate M&A.\n\nWhy Romania for Omnia specifically? We're local enough to price complexity and global enough to unlock markets. The market still lacks domestic pensions as limited partners—another sign the S-curve is early—while foreign capital already dominates fundraising. We turn that to our advantage with Western-grade governance and exit optionality: trade sales or dual-track processes where relevant. Our deal activity illustrates proprietary access and our agnostic investment thesis, from tech-enabled operators to logistics and transportation, supporting real-economy verticals.",
+        date: "April 19, 2024",
         readTime: "7 min read",
-        category: "Operations"
-      },
-      {
-        title: "ESG Integration in Private Equity",
-        excerpt: "Best practices for incorporating environmental, social, and governance factors into investment decisions.",
-        date: "February 28, 2024",
-        readTime: "6 min read",
-        category: "ESG"
+        category: "Market Thesis"
       }
     ]
   },
@@ -295,22 +310,81 @@ const defaultTextContent: TextContent = {
     description: "Recent coverage and recognition of Omnia Prime's investment approach and portfolio company successes.",
     coverage: [
       {
-        title: "Omnia Prime Leads €25M Series B in TechFlow",
-        publication: "European Private Equity",
-        date: "March 20, 2024",
-        excerpt: "Investment focuses on scaling TechFlow's AI-powered workflow automation platform across European markets."
+        title: "123Credit crește de cinci ori într-un an",
+        publication: "HotNews.ro",
+        date: "Accessed 2024",
+        excerpt: "HotNews.ro prezintă modul în care marketplace-ul 123Credit, susținut de Omnia Capital, a devenit liderul digital al creditării din România după o creștere accelerată.",
+        url: "https://hotnews.ro/123credit-creste-de-5-ori-intr-un-an-noul-lider-digital-al-creditarii-din-romania-2070591?utm"
       },
       {
-        title: "The Rise of Operational Private Equity in Europe",
-        publication: "Financial Times",
-        date: "March 12, 2024", 
-        excerpt: "Omnia Prime featured as a leading example of hands-on investment approach driving superior returns."
+        title: "Dumagas, companie din portofoliul Omnia Capital, intră pe segmentul auto",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Ziarul Financiar relatează extinderea transportatorului Dumagas, preluat de Omnia Capital, către noi linii de business din zona auto.",
+        url: "https://www.zf.ro/auto/dumagas-preluata-in-urma-cu-doi-ani-de-omnia-capital-a-intrat-pe-22769406?utm"
       },
       {
-        title: "Sustainability in Tech Investments",
-        publication: "TechCrunch Europe",
-        date: "February 25, 2024",
-        excerpt: "How Omnia Prime integrates ESG principles into its investment thesis and portfolio management."
+        title: "Matei Ladea explică cum companiile românești pot accelera investițiile",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Cofondatorul Omnia Capital, Matei Ladea, discută despre soluțiile prin care antreprenorii locali pot finanța planuri ambițioase de creștere.",
+        url: "https://www.zf.ro/companii/matei-ladea-omnia-capital-companiile-romanesti-pot-acum-investi-in-22779046?utm"
+      },
+      {
+        title: "Omnia Capital investește în platforma Cargo Buddy",
+        publication: "Profit.ro",
+        date: "Accessed 2024",
+        excerpt: "Profit.ro anunță preluarea unei participații la Cargo Buddy de către Omnia Capital pentru a accelera digitalizarea transporturilor.",
+        url: "https://www.profit.ro/povesti-cu-profit/auto-transporturi/tranzactie-omnia-capital-preia-o-parte-din-actiunile-cargo-buddy-platforma-lansata-de-mihai-nastase-21654638?utm"
+      },
+      {
+        title: "Dumagas, controlat de Omnia Capital, pariază pe extindere",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Ziarul Financiar urmărește planurile de creștere ale transportatorului Dumagas după integrarea în portofoliul Omnia Capital.",
+        url: "https://www.zf.ro/companii/transportatorul-local-dumagas-controlat-omnia-capital-pariaza-22167552?utm"
+      },
+      {
+        title: "ZF Live: Matei Ladea despre strategia Omnia Capital",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Matei Ladea, cofondator Omnia Capital, explică la ZF Live modul în care fondul urmărește companii românești cu potențial regional.",
+        url: "https://www.zf.ro/companii/zf-live-matei-ladea-cofondator-omnia-capital-ne-uitat-900-companii-21779125?utm"
+      },
+      {
+        title: "Omnia Capital preia Dumagas de la Bancroft",
+        publication: "CEE Legal Matters",
+        date: "Accessed 2024",
+        excerpt: "CEE Legal Matters analizează achiziția Dumagas de către Omnia Capital și implicarea echipei juridice în tranzacție.",
+        url: "https://ceelegalmatters.com/deal-5/22871-deal-5-omnia-chief-evangelist-matei-ladea-on-dumagas-acquisition-from-bancroft?utm"
+      },
+      {
+        title: "15 minute cu un antreprenor: Matei Ladea",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Interviul ZF 15 minute cu Matei Ladea explorează parcursul Omnia Capital și filosofia de parteneriat cu fondatorii.",
+        url: "https://www.zf.ro/zf-15-minute-cu-un-antreprenor/zf-15-minute-cu-un-antreprenor-matei-ladea-cofondator-al-omnia-20778656?utm"
+      },
+      {
+        title: "123credit.ro ridică 3 milioane de euro cu sprijinul Omnia Capital",
+        publication: "Profit.ro",
+        date: "Accessed 2024",
+        excerpt: "Profit.ro detaliază runda de finanțare prin care Omnia Capital susține extinderea platformei 123credit.ro.",
+        url: "https://www.profit.ro/povesti-cu-profit/startup-ul-123credit-ro-a-obtinut-o-finantare-de-3-milioane-de-euro-prin-intermediul-omnia-capital-in-a-doua-runda-de-finantare-20851209?utm"
+      },
+      {
+        title: "Omnia Capital finalizează preluarea Dumagas",
+        publication: "Romania Insider",
+        date: "Accessed 2024",
+        excerpt: "Romania Insider anunță finalizarea tranzacției prin care Omnia Capital a preluat transportatorul Dumagas.",
+        url: "https://www.romania-insider.com/omnia-capital-dumagas-takeover-2023?utm"
+      },
+      {
+        title: "Fondatorii Omnia Capital discută achiziția Dumagas",
+        publication: "ZF Investiți în România",
+        date: "Accessed 2024",
+        excerpt: "Emisiunea ZF Investiți în România prezintă planurile fondatorilor Omnia Capital după achiziția transportatorului Dumagas.",
+        url: "https://www.zf.ro/zf-investiti-in-romania/zf-investiti-in-romania-fondatorii-companiei-care-a-preluat-dumagas-22344218?utm"
       }
     ]
   },
