@@ -5,6 +5,7 @@ import { useDarkSectionColors } from "./SectionColorProvider";
 import { EditableText } from "./EditableText";
 import { useTextContent } from "./TextContentProvider";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { cn } from "./ui/utils";
 import omniaLogo from "figma:asset/626d67c60cf0a38b4d655862987d1e2e4900526f.png";
 
 export function Footer() {
@@ -12,16 +13,19 @@ export function Footer() {
   const { colors, setColors } = useDarkSectionColors();
   const { textContent } = useTextContent();
   
-  const footerSections = useMemo(
-    () =>
-      Object.entries(textContent.footer.sections || {})
-        .map(([key, section]) => ({ key, ...section }))
-        .filter((section) => {
-          const linkCount = section.links?.length ?? 0;
-          return Boolean(section.title?.trim()) || linkCount > 0;
-        }),
-    [textContent.footer.sections]
-  );
+  const footerSections = useMemo(() => {
+    const hiddenSectionKeys = new Set(["investors", "legal", "company"]);
+
+    return Object.entries(textContent.footer.sections || {})
+      .filter(([key]) => !hiddenSectionKeys.has(key))
+      .map(([key, section]) => ({ key, ...section }))
+      .filter((section) => {
+        const linkCount = section.links?.length ?? 0;
+        return Boolean(section.title?.trim()) || linkCount > 0;
+      });
+  }, [textContent.footer.sections]);
+
+  const hasSections = footerSections.length > 0;
 
   return (
     <>
@@ -52,8 +56,18 @@ export function Footer() {
         ></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-12">
-            <div className="lg:max-w-md lg:flex-1">
+          <div
+            className={cn(
+              "flex flex-col gap-12",
+              hasSections ? "lg:flex-row" : "lg:max-w-2xl lg:mx-auto"
+            )}
+          >
+            <div
+              className={cn(
+                "lg:max-w-md",
+                hasSections ? "lg:flex-1" : "lg:mx-auto"
+              )}
+            >
               <ImageWithFallback
                 src={omniaLogo}
                 alt="Omnia Capital"
@@ -82,7 +96,7 @@ export function Footer() {
               </div>
             </div>
 
-            {footerSections.length > 0 && (
+            {hasSections && (
               <div className="grid gap-8 sm:grid-cols-2 flex-1">
                 {footerSections.map((section) => (
                   <div key={section.key}>

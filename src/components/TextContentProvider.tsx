@@ -448,17 +448,7 @@ const defaultTextContent: TextContent = {
   footer: {
     brandName: "OMNIA PRIME",
     description: "Dedicated growth-equity partner supporting Eastern Europe with institutional capital and hands-on execution.",
-    sections: {
-      company: {
-        title: "Company",
-        links: [
-          { label: "About Us", href: "#about" },
-          { label: "Portfolio", href: "#portfolio" },
-          { label: "Team", href: "#team" },
-          { label: "Careers", href: "#careers" }
-        ]
-      }
-    },
+    sections: {},
     copyright: "© 2024 Omnia Prime. All rights reserved."
   }
 };
