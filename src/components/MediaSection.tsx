@@ -1,5 +1,5 @@
 import { ExternalLink, Award, FileText, Palette } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ColorPicker } from "./ColorPicker";
 import { useSectionColors } from "./SectionColorProvider";
 import { EditableText } from "./EditableText";
@@ -8,34 +8,15 @@ import { useTextContent } from "./TextContentProvider";
 export function MediaSection() {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const { colors, setColors } = useSectionColors('media', true);
-  const { textContent } = useTextContent();
-  
-  const mediaItems = [
-    {
-      type: "Press Release",
-      title: textContent.media.coverage[0].title,
-      source: textContent.media.coverage[0].publication,
-      date: textContent.media.coverage[0].date,
-      excerpt: textContent.media.coverage[0].excerpt,
-      icon: FileText
-    },
-    {
-      type: "Award",
-      title: textContent.media.coverage[1].title,
-      source: textContent.media.coverage[1].publication,
-      date: textContent.media.coverage[1].date,
-      excerpt: textContent.media.coverage[1].excerpt,
-      icon: Award
-    },
-    {
-      type: "Interview",
-      title: textContent.media.coverage[2].title,
-      source: textContent.media.coverage[2].publication,
-      date: textContent.media.coverage[2].date,
-      excerpt: textContent.media.coverage[2].excerpt,
-      icon: ExternalLink
-    }
-  ];
+  const { textContent, isEditing } = useTextContent();
+
+  const mediaItems = useMemo(() => {
+    const icons = [FileText, Award, ExternalLink];
+    return textContent.media.coverage.map((item, index) => ({
+      ...item,
+      icon: icons[index % icons.length]
+    }));
+  }, [textContent.media.coverage]);
 
   return (
     <>
@@ -85,13 +66,23 @@ export function MediaSection() {
           {mediaItems.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+              <a
+                key={item.url ?? index}
+                href={item.url || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={event => {
+                  if (isEditing || !item.url) {
+                    event.preventDefault();
+                  }
+                }}
+                className="block bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow"
+              >
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style={{backgroundColor: 'var(--sky-cool)'}}>
                     <Icon className="w-6 h-6" style={{color: 'var(--blue-corporate)'}} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-caption mb-2 uppercase tracking-wide" style={{color: 'var(--blue-corporate)'}}>{item.type}</div>
                     <EditableText
                       path={`media.coverage.${index}.title`}
                       value={item.title}
@@ -108,7 +99,7 @@ export function MediaSection() {
                     <div className="flex items-center justify-between text-caption text-slate-500">
                       <EditableText
                         path={`media.coverage.${index}.publication`}
-                        value={item.source}
+                        value={item.publication}
                       />
                       <EditableText
                         path={`media.coverage.${index}.date`}
@@ -117,7 +108,7 @@ export function MediaSection() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>
