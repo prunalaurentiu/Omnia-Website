@@ -1,6 +1,5 @@
-import { Calendar, ArrowRight } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
 import { EditableText } from "./EditableText";
 import { useTextContent } from "./TextContentProvider";
 
@@ -42,9 +41,9 @@ export function InsightsSection() {
                   event.preventDefault();
                 }
               }}
-              className="group block"
+              className="group block h-full"
             >
-              <article className="bg-slate-50 rounded-lg p-8 border border-slate-200 transition-shadow group-hover:shadow-lg">
+              <article className="bg-slate-50 rounded-lg p-8 border border-slate-200 transition-shadow group-hover:shadow-lg h-full min-h-[360px] flex flex-col">
                 <EditableText
                   path={`insights.articles.${index}.category`}
                   value={insight.category}
@@ -61,11 +60,11 @@ export function InsightsSection() {
                   path={`insights.articles.${index}.excerpt`}
                   value={insight.excerpt}
                   as="p"
-                  className="text-body text-slate-600 mb-6"
+                  className="text-body text-slate-600 mb-6 flex-1"
                   multiline
                 />
 
-                <div className="flex items-center justify-between text-caption text-slate-500">
+                <div className="mt-auto flex items-center justify-between text-caption text-slate-500">
                   <div className="flex items-center">
                     <Calendar className="w-4 h-4 mr-2" />
                     <EditableText
@@ -83,23 +82,6 @@ export function InsightsSection() {
               </article>
             </Link>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Button variant="outline" asChild>
-            <Link
-              to={insights.length ? `/insights/${insights[0].slug}` : "/"}
-              onClick={(event) => {
-                if (isEditing) {
-                  event.preventDefault();
-                }
-              }}
-              className="inline-flex items-center"
-            >
-              View All Insights
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
         </div>
       </div>
     </section>
