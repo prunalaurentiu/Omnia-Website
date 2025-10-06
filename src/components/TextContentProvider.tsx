@@ -79,8 +79,10 @@ export interface TextContent {
     title: string;
     description: string;
     articles: {
+      slug: string;
       title: string;
       excerpt: string;
+      content: string;
       date: string;
       readTime: string;
       category: string;
@@ -96,6 +98,7 @@ export interface TextContent {
       publication: string;
       date: string;
       excerpt: string;
+      url: string;
     }[];
   };
   
@@ -267,22 +270,31 @@ const defaultTextContent: TextContent = {
     description: "Stay informed with our latest market analysis, industry insights, and thought leadership on technology investment trends.",
     articles: [
       {
+        slug: "future-of-b2b-saas",
         title: "The Future of B2B SaaS: Trends Shaping 2024",
         excerpt: "Exploring the key trends that will define the B2B software landscape, from AI integration to evolving customer expectations.",
+        content:
+          "B2B SaaS has entered a new maturity curve where vertical expertise outweighs horizontal feature sets. Buyers now expect products that solve industry-specific workflows, integrate with legacy data sources, and come with embedded analytics that shorten time-to-value. Founders that build deep partnerships with launch customers and co-design modules around regulated processes will continue to capture disproportionate market share.\n\nArtificial intelligence is shifting from a stand-alone capability to an operating principle. Instead of marketing AI as a differentiator, leading companies embed machine learning into onboarding, security, and customer success so users experience tangible productivity gains without retraining their teams. This requires disciplined data governance and model monitoring from day one—areas where Omnia Prime actively supports portfolio companies.\n\nFinally, the financing landscape is rewarding efficient growth. Investors prioritise net revenue retention, capital-light expansion strategies, and diversified go-to-market playbooks over headline ARR growth. Operators that master usage-based pricing, channel partnerships, and customer-led community building will outperform as the market normalises.",
         date: "March 15, 2024",
         readTime: "5 min read",
         category: "Market Analysis"
       },
       {
+        slug: "operational-excellence-in-high-growth",
         title: "Operational Excellence in High-Growth Startups",
         excerpt: "How portfolio companies can maintain operational efficiency while scaling rapidly in competitive markets.",
-        date: "March 8, 2024", 
+        content:
+          "Scaling companies often inherit the heroics of their founding teams—processes live in spreadsheets, vendor relationships depend on personal rapport, and institutional knowledge is rarely documented. The first step toward operational excellence is mapping critical workflows and deciding which ones require automation, outsourcing, or new leadership. Building a 90-day plan that clarifies decision rights, success metrics, and weekly operating cadences keeps execution on track even as headcount doubles.\n\nCommercial acceleration should happen in lockstep with operational upgrades. Implementing structured sales stages, revenue forecasting discipline, and post-sale handoffs enables teams to spot friction before it reaches customers. Paired with scenario-based financial planning, leadership can invest confidently in growth levers without overextending working capital.\n\nThe final ingredient is cultural. High-performing scale-ups promote continuous improvement rituals—retrospectives, cross-functional stand-ups, and transparent dashboards—that highlight bottlenecks early. Omnia Prime partners with founders to install these habits, ensuring that growth compounds instead of creating hidden fragility.",
+        date: "March 8, 2024",
         readTime: "7 min read",
         category: "Operations"
       },
       {
+        slug: "esg-integration-private-equity",
         title: "ESG Integration in Private Equity",
         excerpt: "Best practices for incorporating environmental, social, and governance factors into investment decisions.",
+        content:
+          "ESG integration begins before an investment memorandum is drafted. Sector screening must evaluate regulatory headwinds, resource intensity, and community impact alongside financial attractiveness. During due diligence, leading funds assess carbon baselines, workforce policies, and governance structures to quantify both risks and upside. These diagnostics set realistic improvement targets that can be embedded into shareholder agreements and management incentives.\n\nPost-close, ESG moves from policy to execution. Portfolio companies benefit from pragmatic roadmaps that blend quick wins—energy-efficiency audits, safety training refreshers, inclusive hiring frameworks—with longer-term initiatives such as supplier diversification and circular product design. Tracking progress requires consistent data collection and board-level review so ESG metrics carry the same weight as EBITDA and cash conversion.\n\nWhen executed with intent, ESG creates measurable enterprise value. Companies unlock cheaper financing, win contracts that mandate sustainability credentials, and retain talent that wants to work for responsible employers. Omnia Prime leverages its operating network to help founders capture these benefits while meeting institutional LP expectations.",
         date: "February 28, 2024",
         readTime: "6 min read",
         category: "ESG"
@@ -295,22 +307,81 @@ const defaultTextContent: TextContent = {
     description: "Recent coverage and recognition of Omnia Prime's investment approach and portfolio company successes.",
     coverage: [
       {
-        title: "Omnia Prime Leads €25M Series B in TechFlow",
-        publication: "European Private Equity",
-        date: "March 20, 2024",
-        excerpt: "Investment focuses on scaling TechFlow's AI-powered workflow automation platform across European markets."
+        title: "123Credit crește de cinci ori într-un an",
+        publication: "HotNews.ro",
+        date: "Accessed 2024",
+        excerpt: "HotNews.ro prezintă modul în care marketplace-ul 123Credit, susținut de Omnia Capital, a devenit liderul digital al creditării din România după o creștere accelerată.",
+        url: "https://hotnews.ro/123credit-creste-de-5-ori-intr-un-an-noul-lider-digital-al-creditarii-din-romania-2070591?utm"
       },
       {
-        title: "The Rise of Operational Private Equity in Europe",
-        publication: "Financial Times",
-        date: "March 12, 2024", 
-        excerpt: "Omnia Prime featured as a leading example of hands-on investment approach driving superior returns."
+        title: "Dumagas, companie din portofoliul Omnia Capital, intră pe segmentul auto",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Ziarul Financiar relatează extinderea transportatorului Dumagas, preluat de Omnia Capital, către noi linii de business din zona auto.",
+        url: "https://www.zf.ro/auto/dumagas-preluata-in-urma-cu-doi-ani-de-omnia-capital-a-intrat-pe-22769406?utm"
       },
       {
-        title: "Sustainability in Tech Investments",
-        publication: "TechCrunch Europe",
-        date: "February 25, 2024",
-        excerpt: "How Omnia Prime integrates ESG principles into its investment thesis and portfolio management."
+        title: "Matei Ladea explică cum companiile românești pot accelera investițiile",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Cofondatorul Omnia Capital, Matei Ladea, discută despre soluțiile prin care antreprenorii locali pot finanța planuri ambițioase de creștere.",
+        url: "https://www.zf.ro/companii/matei-ladea-omnia-capital-companiile-romanesti-pot-acum-investi-in-22779046?utm"
+      },
+      {
+        title: "Omnia Capital investește în platforma Cargo Buddy",
+        publication: "Profit.ro",
+        date: "Accessed 2024",
+        excerpt: "Profit.ro anunță preluarea unei participații la Cargo Buddy de către Omnia Capital pentru a accelera digitalizarea transporturilor.",
+        url: "https://www.profit.ro/povesti-cu-profit/auto-transporturi/tranzactie-omnia-capital-preia-o-parte-din-actiunile-cargo-buddy-platforma-lansata-de-mihai-nastase-21654638?utm"
+      },
+      {
+        title: "Dumagas, controlat de Omnia Capital, pariază pe extindere",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Ziarul Financiar urmărește planurile de creștere ale transportatorului Dumagas după integrarea în portofoliul Omnia Capital.",
+        url: "https://www.zf.ro/companii/transportatorul-local-dumagas-controlat-omnia-capital-pariaza-22167552?utm"
+      },
+      {
+        title: "ZF Live: Matei Ladea despre strategia Omnia Capital",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Matei Ladea, cofondator Omnia Capital, explică la ZF Live modul în care fondul urmărește companii românești cu potențial regional.",
+        url: "https://www.zf.ro/companii/zf-live-matei-ladea-cofondator-omnia-capital-ne-uitat-900-companii-21779125?utm"
+      },
+      {
+        title: "Omnia Capital preia Dumagas de la Bancroft",
+        publication: "CEE Legal Matters",
+        date: "Accessed 2024",
+        excerpt: "CEE Legal Matters analizează achiziția Dumagas de către Omnia Capital și implicarea echipei juridice în tranzacție.",
+        url: "https://ceelegalmatters.com/deal-5/22871-deal-5-omnia-chief-evangelist-matei-ladea-on-dumagas-acquisition-from-bancroft?utm"
+      },
+      {
+        title: "15 minute cu un antreprenor: Matei Ladea",
+        publication: "Ziarul Financiar",
+        date: "Accessed 2024",
+        excerpt: "Interviul ZF 15 minute cu Matei Ladea explorează parcursul Omnia Capital și filosofia de parteneriat cu fondatorii.",
+        url: "https://www.zf.ro/zf-15-minute-cu-un-antreprenor/zf-15-minute-cu-un-antreprenor-matei-ladea-cofondator-al-omnia-20778656?utm"
+      },
+      {
+        title: "123credit.ro ridică 3 milioane de euro cu sprijinul Omnia Capital",
+        publication: "Profit.ro",
+        date: "Accessed 2024",
+        excerpt: "Profit.ro detaliază runda de finanțare prin care Omnia Capital susține extinderea platformei 123credit.ro.",
+        url: "https://www.profit.ro/povesti-cu-profit/startup-ul-123credit-ro-a-obtinut-o-finantare-de-3-milioane-de-euro-prin-intermediul-omnia-capital-in-a-doua-runda-de-finantare-20851209?utm"
+      },
+      {
+        title: "Omnia Capital finalizează preluarea Dumagas",
+        publication: "Romania Insider",
+        date: "Accessed 2024",
+        excerpt: "Romania Insider anunță finalizarea tranzacției prin care Omnia Capital a preluat transportatorul Dumagas.",
+        url: "https://www.romania-insider.com/omnia-capital-dumagas-takeover-2023?utm"
+      },
+      {
+        title: "Fondatorii Omnia Capital discută achiziția Dumagas",
+        publication: "ZF Investiți în România",
+        date: "Accessed 2024",
+        excerpt: "Emisiunea ZF Investiți în România prezintă planurile fondatorilor Omnia Capital după achiziția transportatorului Dumagas.",
+        url: "https://www.zf.ro/zf-investiti-in-romania/zf-investiti-in-romania-fondatorii-companiei-care-a-preluat-dumagas-22344218?utm"
       }
     ]
   },
