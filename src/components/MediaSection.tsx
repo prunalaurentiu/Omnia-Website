@@ -1,5 +1,5 @@
-import { Palette, ArrowLeft, ArrowRight } from "lucide-react";
-import { useRef, useState } from "react";
+import { Palette } from "lucide-react";
+import { useMemo, useState } from "react";
 import { ColorPicker } from "./ColorPicker";
 import { useSectionColors } from "./SectionColorProvider";
 import { EditableText } from "./EditableText";
@@ -7,28 +7,38 @@ import { useTextContent } from "./TextContentProvider";
 
 export function MediaSection() {
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const { colors, setColors } = useSectionColors('media', true);
+  const { colors, setColors } = useSectionColors("media", true);
   const { textContent, isEditing } = useTextContent();
+  const coverage = textContent.media.coverage;
+  const itemsPerView = 3;
+  const [startIndex, setStartIndex] = useState(0);
 
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const visibleCoverage = useMemo(() => {
+    if (coverage.length <= itemsPerView) {
+      return coverage.map((item, index) => ({ item, index }));
+    }
 
-  const handleScroll = (direction: "left" | "right") => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+    const items = [] as { item: (typeof coverage)[number]; index: number }[];
+    for (let offset = 0; offset < itemsPerView; offset += 1) {
+      const index = (startIndex + offset) % coverage.length;
+      items.push({ item: coverage[index], index });
+    }
+    return items;
+  }, [coverage, itemsPerView, startIndex]);
 
-    const card = container.querySelector<HTMLAnchorElement>("a[data-media-card]");
-    const cardWidth = card ? card.offsetWidth : container.clientWidth / 3;
-    const scrollAmount = cardWidth * 3;
-
-    container.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth"
-    });
+  const handleShowMore = () => {
+    if (coverage.length <= itemsPerView) return;
+    setStartIndex((prev) => (prev + itemsPerView) % coverage.length);
   };
 
   return (
     <>
-      <section className="py-20 text-white relative overflow-hidden" style={{background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`}}>
+      <section
+        className="py-20 bg-gradient-to-br from-slate-50 to-slate-100 relative overflow-hidden"
+        style={{
+          background: `linear-gradient(to bottom, ${colors.gradientStart}, ${colors.gradientEnd})`
+        }}
+      >
         {/* Color Picker Button */}
         <button
           onClick={() => setShowColorPicker(true)}
@@ -53,29 +63,25 @@ export function MediaSection() {
             opacity: colors.accentCircle2Opacity
           }}
         ></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <EditableText
-            path="media.title"
-            value={textContent.media.title}
-            as="h2"
-            className="text-section text-white mb-4"
-          />
-          <EditableText
-            path="media.description"
-            value={textContent.media.description}
-            as="p"
-            className="text-body text-blue-100 max-w-2xl mx-auto"
-            multiline
-          />
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <EditableText
+              path="media.title"
+              value={textContent.media.title}
+              as="h2"
+              className="text-section text-slate-900 mb-4"
+            />
+            <EditableText
+              path="media.description"
+              value={textContent.media.description}
+              as="p"
+              className="text-body text-slate-600 max-w-3xl mx-auto"
+              multiline
+            />
+          </div>
 
-        <div className="relative">
-          <div
-            ref={scrollContainerRef}
-            className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory px-1"
-          >
-            {textContent.media.coverage.map((item, index) => (
+          <div className="grid md:grid-cols-3 gap-8">
+            {visibleCoverage.map(({ item, index }) => (
               <a
                 key={item.url ?? index}
                 href={item.url || "#"}
@@ -86,9 +92,7 @@ export function MediaSection() {
                     event.preventDefault();
                   }
                 }}
-                data-media-card
-                className="group block h-full snap-start shrink-0 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/3"
-                style={{ maxWidth: "32rem" }}
+                className="group block h-full"
               >
                 <article className="bg-slate-50 rounded-lg p-8 border border-slate-200 transition-shadow group-hover:shadow-lg h-full min-h-[360px] flex flex-col">
                   <EditableText
@@ -117,7 +121,6 @@ export function MediaSection() {
                     />
                     <span className="inline-flex items-center text-blue-600 group-hover:text-blue-700">
                       Read article
-                      <ArrowRight className="w-4 h-4 ml-2" />
                     </span>
                   </div>
                 </article>
@@ -125,36 +128,28 @@ export function MediaSection() {
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center justify-between pointer-events-none">
-            <button
-              type="button"
-              onClick={() => handleScroll("left")}
-              className="pointer-events-auto absolute -left-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur rounded-full p-3 shadow-md hover:bg-white"
-              aria-label="Scroll media left"
-            >
-              <ArrowLeft className="w-5 h-5 text-slate-700" />
-            </button>
-            <button
-              type="button"
-              onClick={() => handleScroll("right")}
-              className="pointer-events-auto absolute -right-4 top-1/2 -translate-y-1/2 bg-white/80 backdrop-blur rounded-full p-3 shadow-md hover:bg-white"
-              aria-label="Scroll media right"
-            >
-              <ArrowRight className="w-5 h-5 text-slate-700" />
-            </button>
-          </div>
-        </div>
+          {coverage.length > itemsPerView && (
+            <div className="mt-12 flex justify-center">
+              <button
+                type="button"
+                onClick={handleShowMore}
+                className="px-6 py-3 text-sm font-semibold rounded-full bg-slate-900 text-white shadow-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+              >
+                Click here to see more
+              </button>
+            </div>
+          )}
 
-        <div className="text-center mt-12">
-          <div className="inline-flex items-center space-x-4 text-sm text-blue-100">
-            <span>Press inquiries:</span>
-            <a href="mailto:invest@omnia.capital" className="text-white hover:opacity-80 underline">
-              invest@omnia.capital
-            </a>
+          <div className="text-center mt-12">
+            <div className="inline-flex items-center space-x-4 text-sm text-slate-500">
+              <span>Press inquiries:</span>
+              <a href="mailto:invest@omnia.capital" className="text-slate-900 hover:opacity-80 underline">
+                invest@omnia.capital
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     
     {showColorPicker && (
       <ColorPicker
